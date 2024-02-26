@@ -1,0 +1,56 @@
+@layer components {
+  .button {
+    @apply text-white focus:ring-4 font-normal text-base flex items-center justify-center p-4 h-13 focus:outline-none rounded-lg;
+
+    // variants
+    &--bordered {
+      @apply border border-solid;
+    }
+
+    &--primary {
+      @apply border-primary text-primary hover:bg-primary hover:text-white focus:ring-red-300;
+
+      &:not(.button--bordered) {
+        @apply bg-primary text-white hover:bg-primary/90 focus:ring-red-300;
+      }
+    }
+
+    &--white {
+      @apply bg-white text-purple-500 hover:bg-gray-200/90 focus:ring-gray-100 ;
+    }
+
+    &:disabled,
+    &[disabled] {
+      // @apply text-gray-150;
+        pointer-events: none;
+        filter: grayscale(1);
+        opacity: 0.6;
+      &:not(.button--bordered) {
+        @apply bg-gray-150;
+        pointer-events: none;
+      }
+    }
+
+    // Button sizes
+    &--size-lg {
+      @apply text-lg;
+    }
+
+    &--size-sm {
+      @apply text-sm;
+    }
+
+    // Button Rounded
+    &--rounded-bill {
+      @apply rounded-full;
+    }
+
+    &--rounded-sm {
+      @apply rounded;
+    }
+
+    &--rounded-lg {
+      @apply rounded-lg;
+    }
+  }
+}

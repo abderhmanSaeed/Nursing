@@ -1,0 +1,74 @@
+@layer components {
+  .order-placed-state {
+    &--textColor {
+      @apply text-lightBlue-500;
+    }
+
+    &--bgColor {
+      @apply bg-lightBlue-500;
+    }
+
+    &--borderColor {
+      @apply border-lightBlue-500;
+    }
+  }
+
+  .order-shipping-state,
+  .order-pickUp-state,
+  .order-delivery-state {
+    &--textColor {
+      @apply text-orange-700;
+    }
+
+    &--bgColor {
+      @apply bg-orange-700;
+    }
+
+    &--borderColor {
+      @apply border-orange-700;
+    }
+  }
+
+  .order-canceled-state,
+  .order-refund-state {
+    &--textColor {
+      @apply text-red-700;
+    }
+
+    &--bgColor {
+      @apply bg-red-700;
+    }
+
+    &--borderColor {
+      @apply border-red-700;
+    }
+  }
+
+  .order-returned-state {
+    &--textColor {
+      @apply text-yellow-500;
+    }
+
+    &--bgColor {
+      @apply bg-yellow-500;
+    }
+
+    &--borderColor {
+      @apply border-yellow-500;
+    }
+  }
+
+  .order-delivered-state {
+    &--textColor {
+      @apply text-green-600;
+    }
+
+    &--bgColor {
+      @apply bg-green-600;
+    }
+
+    &--borderColor {
+      @apply border-green-600;
+    }
+  }
+}
