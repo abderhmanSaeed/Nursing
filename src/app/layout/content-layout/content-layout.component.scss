@@ -1,0 +1,15 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .container-scroller {
+    height: 100%;
+  }
+}
+
+.button {
+  overflow: hidden;
+  transition: width 300ms ease-in-out;
+}

@@ -1,0 +1,26 @@
+@layer base {
+  a {
+    &:hover {
+      @apply underline cursor-pointer;
+    }
+  }
+  h1 {
+    @apply text-2.5xl font-medium;
+  }
+
+  h2 {
+    @apply text-2xl font-medium;
+  }
+
+  h4 {
+    @apply text-xl font-medium;
+  }
+
+  h5 {
+    @apply text-lg font-medium;
+  }
+
+  h6 {
+    @apply text-base font-medium;
+  }
+}

@@ -1,0 +1,36 @@
+<button (click)="toggleDropdown()" id="changeLangButton" [class.active]="isDropdownVisible"
+  class="btn btn-outline-primary rounded-circle p-1" type="button">
+  <ng-container *ngFor="let flag of flags">
+    <img *ngIf="selectedLanguage === flag.name" [src]="flag.image" alt="{{ flag.name }}" class="rounded-circle"
+      style="width: 20px; height: 20px;"/>
+  </ng-container>
+  {{ selectedLanguage }}
+  <svg class="ms-1" style="width: 10px; height: 10px;"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+    >
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+  </svg>
+</button>
+
+
+
+
+<!-- <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag, flag.lang)">
+  <img [src]="flag.image" width="18" class="mat-elevation-z1 mx-2" /><span class="flag-name">{{ flag.name }}</span>
+</button> -->
+
+<!-- Dropdown menu -->
+<div id="dropdown" [class.d-none]="!isDropdownVisible" class="dropdown-menu show">
+  <ul class="list-unstyled m-0" aria-labelledby="changeLangButton"  >
+    <li *ngFor="let flag of flags" class="dropdown-item p-0"> <!-- Bootstrap dropdown item class -->
+      <button (click)="handleLanguageSelection(flag, flag.lang)" class="btn text-start w-100 px-3 py-2">
+        <img [src]="flag.image" width="24" class="rounded-circle me-2"
+        alt="{{ flag.name }}"
+        /><span class="flag-name">{{ flag.name }}</span>
+      </button>
+    </li>
+  </ul>
+</div>
