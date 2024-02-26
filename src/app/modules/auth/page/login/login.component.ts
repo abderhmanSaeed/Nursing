@@ -16,7 +16,6 @@ export class LoginComponent {
   handleNameChange(event: any) {
     this.usernameOrMobile = event;
   }
-
   handlePasswordChange(event: any) {
     this.password = event;
   }
