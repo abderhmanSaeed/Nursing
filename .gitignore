@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # These are some examples of commonly ignored file patterns.
 # You should customize this list as applicable to your project.
 # Learn more about .gitignore:
@@ -50,6 +51,8 @@ Thumbs.db
 *.wmv
 
 =======
+=======
+>>>>>>> 4de0def7f3cfd5a65d620b8d9e247e71bc9e547d
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
@@ -92,4 +95,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 >>>>>>> 74e9a30 (first code with best practice)
+=======
+>>>>>>> 4de0def7f3cfd5a65d620b8d9e247e71bc9e547d
