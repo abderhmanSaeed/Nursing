@@ -10,6 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputPasswordComponent } from './components/inputs/input-password/input-password.component';
 import { InputFiledComponent } from './components/inputs/input-filed/input-filed.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -17,7 +18,8 @@ import { InputFiledComponent } from './components/inputs/input-filed/input-filed
   declarations: [
     SwitchLanguageComponent,
     InputPasswordComponent,
-    InputFiledComponent
+    InputFiledComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { InputFiledComponent } from './components/inputs/input-filed/input-filed
     CommonModule,
     TranslateModule,
     InputPasswordComponent,
-    InputFiledComponent
+    InputFiledComponent,
+    LoadingComponent
   ],
   providers: [
     TranslationService,

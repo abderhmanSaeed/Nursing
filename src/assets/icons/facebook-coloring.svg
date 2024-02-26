@@ -1,0 +1,17 @@
+<svg id="svgexport-17_23_" data-name="svgexport-17 (23)" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+  viewBox="0 0 20 20">
+  <g id="Group_16589" data-name="Group 16589" transform="translate(0 0)">
+    <path id="Path_46412" data-name="Path 46412"
+      d="M10,20H5a5,5,0,0,1-5-5V5A5,5,0,0,1,5,0H15a5,5,0,0,1,5,5V15a5,5,0,0,1-5,5H13.125A1.562,1.562,0,1,0,10,20Z"
+      transform="translate(0 0)" fill="#3764b9" fill-rule="evenodd" />
+    <path id="Path_46413" data-name="Path 46413"
+      d="M9.275,6.112h5.565a2.912,2.912,0,0,0,2.782-2.9,2.981,2.981,0,0,0-2.5-3.2C15.031.01,14.937,0,14.841,0H4.947A5.207,5.207,0,0,0,0,5.433V16.3C0,10.673,4.153,6.112,9.275,6.112"
+      transform="translate(0 0)" fill="#507dd2" fill-rule="evenodd" />
+    <path id="Path_46414" data-name="Path 46414"
+      d="M37.433,21.433a5.433,5.433,0,1,0,5.433,5.433V16a5.433,5.433,0,0,1-5.433,5.433"
+      transform="translate(-22.866 -12.3)" fill="#1e4ba0" fill-rule="evenodd" />
+    <path id="Path_46415" data-name="Path 46415"
+      d="M33.508,12.7a.677.677,0,0,1-.679.674H30.791a.677.677,0,0,0-.679.674v2.7h2.567a.681.681,0,0,1,.525.247.671.671,0,0,1,.141.56l-.407,2.023a.678.678,0,0,1-.666.542h-2.16v8.092h-3.4V20.114H24.679A.677.677,0,0,1,24,19.44V17.417a.677.677,0,0,1,.679-.674h2.037v-2.7A4.06,4.06,0,0,1,30.791,10h2.037a.677.677,0,0,1,.679.674Z"
+      transform="translate(-17.005 -8.206)" fill="#fff" fill-rule="evenodd" />
+  </g>
+</svg>

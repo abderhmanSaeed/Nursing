@@ -12,11 +12,11 @@ export class FooterComponent {
 
   links: any[] = [
     {
-      href: 'https://wndo.com/terms-and-conditions/',
+      href: 'termsCondition',
       title: 'termsCondition',
     },
     {
-      href: 'https://wndo.com/privacy-policy/',
+      href: 'privacyPolicy',
       title: 'privacyPolicy',
     },
     {
@@ -55,22 +55,22 @@ export class FooterComponent {
   ];
   socialMedia: any[] = [
     {
-      href: 'https://youtube.com/@WndoApp',
+      href: '',
       title: 'youtube',
       icon: "fa-youtube"
     },
     {
-      href: 'https://m.facebook.com/WndoApp/?mibextid=LQQJ4d',
+      href: '',
       title: 'facebook',
       icon: "fa-square-facebook"
     },
     {
-      href: 'https://twitter.com/wndo_app?s=11&t=cqO0zK5aEhf5wR4R4c-1mQ',
+      href: '',
       title: 'twitter',
       icon: "fa-square-x-twitter"
     },
     {
-      href: 'https://instagram.com/wndo.app?igshid=MWI4MTIyMDE=',
+      href: '',
       title: 'instagram',
       icon: "fa-square-instagram"
     },

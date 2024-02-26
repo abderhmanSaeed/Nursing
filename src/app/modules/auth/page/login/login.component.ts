@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../../../data/service/login/login.service';
+import { AuthService } from '../../../../core/service/auth/auth.service';
+import { Router } from '@angular/router';
+import { CONFIG } from '../../../../shared/configs';
 
 
 
@@ -11,7 +14,10 @@ import { LoginService } from '../../../../data/service/login/login.service';
 export class LoginComponent {
   usernameOrMobile: string = '';
   password: string = '';
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private authService: AuthService,
+    private router: Router,
+  ) { }
+
 
   handleNameChange(event: any) {
     this.usernameOrMobile = event;
@@ -30,7 +36,16 @@ export class LoginComponent {
       next: (response) => {
         if (response.Success) {
           console.log('Login Success:', response.Data);
-          // Handle successful login, navigate to dashboard, etc.
+          console.log('Login Success:', response.Data);
+          // Extract the token from the response and save it
+          this.authService.setToken(response.Data.Token);
+          localStorage.setItem('user_info', JSON.stringify({
+            NameAr: response.Data.NameAr,
+            NameEn: response.Data.NameEn,
+            PhoneList: response.Data.PhoneList
+          }));
+          // Handle successful login, e.g., navigate to the dashboard
+          this.router.navigate([CONFIG.dashboard.name]); // Assuming you have routing set up
         } else {
           console.error('Login Failed:', response.Message);
           // Handle login failure, show error message, etc.

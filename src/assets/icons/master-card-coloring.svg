@@ -1,0 +1,11 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="30.838" height="18.685" viewBox="0 0 30.838 18.685">
+  <g id="Group_15744" data-name="Group 15744" transform="translate(-1256.984 -930.997)">
+    <g id="Group_14031" data-name="Group 14031" transform="translate(1257 931)">
+      <path id="Path_69" data-name="Path 69" d="M38.68,23.34A9.34,9.34,0,1,1,29.34,14a9.34,9.34,0,0,1,9.34,9.34Z" transform="translate(-7.858 -14)" fill="#ffc107"/>
+      <path id="Path_70" data-name="Path 70" d="M21.025,28.944a9.3,9.3,0,0,1-1.1-1.868H24.9a9.291,9.291,0,0,0,.595-1.868H19.332a9.243,9.243,0,0,1-.19-1.868H25.68a9.512,9.512,0,0,0-.186-1.868H19.328a9.306,9.306,0,0,1,.6-1.868H24.9a9.3,9.3,0,0,0-1.1-1.868H21.025a9.371,9.371,0,0,1,1.383-1.489,9.342,9.342,0,1,0,1.39,12.7Z" transform="translate(-7 -14)" fill="#ff3d00"/>
+    </g>
+    <text id="Master" transform="translate(1259.73 939.783)" fill="#fff" font-size="2" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Master</tspan></text>
+    <text id="Card" transform="translate(1277.73 939.783)" fill="#fff" font-size="2" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Card</tspan></text>
+  </g>
+</svg>

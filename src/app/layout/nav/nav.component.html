@@ -1,4 +1,4 @@
-<section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }">
+<section class="header-page mb-24" [class.mb-40]="isShowDetails" class="flex">
   <!-- <section class="header-page mb-24"
   [class.mb-40]="isShowDetails"
   [ngClass]="{ 'flex': isProductOffersRoute }"
@@ -11,7 +11,6 @@
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">
-          <!-- (!isProductOffersRoute && this.seller) || sellerProfile -->
       </div>
 
       <ul class="flex gap-5">
@@ -19,15 +18,10 @@
           <app-switch-language></app-switch-language>
         </li>
         <li>
-          <button type="button"
+          <button type="button" *ngIf="isAuthenticated"
             class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
-            [routerLink]="['/product/productOrders']">
-            <!-- <svg-icon src="../../../../assets/icons/cart.svg"
-              [svgStyle]="{ 'width.px': 22, fill: '#4E4E78' }"></svg-icon>
-            <span *ngIf="products.length > 0 "
-              class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2">
-              {{  products.length  }}
-            </span> -->
+            (click)="logout()">
+            {{"Logout" | translate}}
           </button>
 
         </li>
