@@ -6,25 +6,23 @@
           <h3 class="text-center">{{"login" |translate}}</h3>
         </div>
         <div class="card-body">
-          <form>
             <div class="mb-3">
-              <label for="usernameOrMobile" class="form-label">{{"usernameOrMobile" | translate}}</label>
-              <div class="input-group">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" id="usernameOrMobile" [placeholder]="('usernameOrMobile' |translate)">
-              </div>
+              <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
+                [name]="'usernameOrMobile'" [type]="'text'"
+                [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                (nameChanged)="handleNameChange($event)" [required]="true">
+              </app-input-filed>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">{{"Password" |translate}}</label>
-              <div class="input-group">
-                <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
-                <input type="password" class="form-control" id="password" [placeholder]="('Password' |translate)">
-              </div>
+              <app-input-password [label]="'Password' | translate" [placeholder]="'Password' | translate"
+                [name]="'password'" [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                (valueChange)="handlePasswordChange($event)" [required]="true">
+              </app-input-password>
             </div>
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">{{"login" |translate}}</button>
+              <button (click)="handleLogin()" class="btn btn-primary">{{"login" | translate}}</button>
             </div>
-          </form>
+
         </div>
       </div>
     </div>

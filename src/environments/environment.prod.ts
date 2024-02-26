@@ -7,7 +7,7 @@ export const environment = {
   serverUrl: '/api',
   envName: 'PROD',
   middleware: '',
-  apiEndPoint: 'https://wndo.net:8090/api/app',
+  apiEndPoint: 'http://egyptsmartseniors.com/api',
   mobileAppIosUrl: 'https://apps.apple.com/eg/app/wndo/id1588238250',
   mobileAppGooglePlayUrl: 'https://play.google.com/store/apps/details?id=com.window.wndo',
 

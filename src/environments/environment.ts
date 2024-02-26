@@ -13,7 +13,7 @@ export const environment = {
   mobileAppGooglePlayUrl: 'https://play.google.com/store/apps/details?id=com.window.wndo',
   envName: 'DEV',
   middleware: '',
-  apiEndPoint: 'https://wndo.net:8090/api/app',
+  apiEndPoint: 'http://egyptsmartseniors.com/api',
 };
 
 /*

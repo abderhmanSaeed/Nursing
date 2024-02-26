@@ -8,12 +8,16 @@ import { SwitchLanguageComponent } from './components/switch-language/switch-lan
 import { TranslationService } from '../data/service/translation/translation.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputPasswordComponent } from './components/inputs/input-password/input-password.component';
+import { InputFiledComponent } from './components/inputs/input-filed/input-filed.component';
 
 
 
 @NgModule({
   declarations: [
-    SwitchLanguageComponent
+    SwitchLanguageComponent,
+    InputPasswordComponent,
+    InputFiledComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
   ],
   exports: [SwitchLanguageComponent,
+    CommonModule,
     TranslateModule,
+    InputPasswordComponent,
+    InputFiledComponent
   ],
   providers: [
     TranslationService,
