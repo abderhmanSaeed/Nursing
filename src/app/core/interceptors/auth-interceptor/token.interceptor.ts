@@ -5,20 +5,18 @@ import { AuthService } from '../../service/auth/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService ) { }
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // Log original headers
-    console.log('Original Headers:', request.headers);
 
     // Get the authentication token from the AuthService
     const token = this.authService.getToken();
-    console.log('Token:', token);
+
 
     // Get the current language from TranslationService
     const currentLang = this.authService.getCurrentLanguage();
-    console.log('Current Language:', currentLang);
+
     // Clone the request and set the necessary headers
     request = request.clone({
       setHeaders: {

@@ -1,1 +1,47 @@
-<p>users works!</p>
+<!-- user-list.component.html -->
+<header class="masthead">
+  <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+    <div class="d-flex justify-content-center">
+      <div class="text-center">
+        <div class="container mt-4">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Search by phone or username..." [(ngModel)]="searchTerm">
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+              Add User
+            </button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filteredUsers; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ getCurrentName(user) }}</td>
+                <td>{{ user.Email }}</td>
+                <td>{{ user.PhoneList[0] }}</td>
+                <td>
+                  <!-- Example actions -->
+                  <button class="btn btn-primary btn-sm">Edit</button>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</header>

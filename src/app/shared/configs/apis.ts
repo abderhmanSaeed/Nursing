@@ -14,6 +14,6 @@ export class APIs {
 
 
     // users APIs
-    public static users = '/User/GetAllUsers';
+    public static getAllUsers = '/User/GetAllUsers'; // Ensure this line is added
 
 }

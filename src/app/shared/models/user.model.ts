@@ -19,3 +19,6 @@ export interface User {
   Activated: boolean | null;
   AttendanceCount: number;
 }
+
+// Optionally, if you want to specifically type the 'Data' field for the GetAllUsers response:
+export type UsersResponse = User[];

@@ -1,31 +1,22 @@
 <section class="header-page mb-24" [class.mb-40]="isShowDetails" class="flex">
-  <!-- <section class="header-page mb-24"
-  [class.mb-40]="isShowDetails"
-  [ngClass]="{ 'flex': isProductOffersRoute }"
-  [ngStyle]="{'background-image': 'url(' + (seller?.cover ? seller?.cover : (sellerProfile?.cover ? sellerProfile?.cover : sellerCover)) + ')',
-              'background-repeat': 'no-repeat',
-              'background-size': 'cover',
-              'height': '125px',
-              'background-position': 'center'}"> -->
+  <div class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <app-switch-language></app-switch-language>
 
-  <div class="content-page">
-    <section class="flex justify-between items-center">
-      <div class="flex items-end w-32 h-32 mt-12">
-      </div>
-
-      <ul class="flex gap-5">
-        <li>
-          <app-switch-language></app-switch-language>
-        </li>
-        <li>
-          <button type="button" *ngIf="isAuthenticated"
+        <button type="button" *ngIf="isAuthenticated"
             class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
             (click)="logout()">
             {{"Logout" | translate}}
           </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user">users</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-        </li>
-      </ul>
-    </section>
-  </div>
+
 </section>
