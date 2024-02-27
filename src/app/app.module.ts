@@ -13,8 +13,7 @@ import { TranslationService } from './data/service/translation/translation.servi
 import { SharedModule } from './shared/shared.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +30,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    ModalModule.forRoot(),
+    NgbModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

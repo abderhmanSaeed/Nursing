@@ -6,6 +6,7 @@ import { UsersComponent } from './page/users/users.component';
 import { SharedModule } from '../../shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     UsersComponent
@@ -13,7 +14,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     UserRoutingModule,
-    SharedModule
+    SharedModule,
+
   ]
 })
 export class UserModule { }
