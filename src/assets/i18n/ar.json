@@ -48,6 +48,8 @@
   "confirm" : "تأكيد",
   "guest" : "زائر",
   "signUp" : "اشتراك",
-  "usernameOrMobile":"اسم المستخدم أو رقم الهاتف"
+  "usernameOrMobile":"اسم المستخدم أو رقم الهاتف",
+  "userEmpty":"لا يوجد لديك مستخدمين"
+
 
 }

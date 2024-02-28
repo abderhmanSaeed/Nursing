@@ -16,19 +16,21 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   searchTerm: string = '';
   selectedRoleId: string = ''; // Variable to hold the selected role ID
+  currentPage = 1;
+  itemsPerPage = 1; // Show one user per page
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getAllUsers();
   }
+
   getAllUsers() {
     this.userService.getAllUsers().subscribe({
       next: (response: ApiResponse<User[]>) => {
         if (response.Success && response.Data) {
           this.users = response.Data;
         } else {
-          // Handle the case where the API call was not successful or returned no data
           console.error('Failed to load users:', response.Message);
         }
       },
@@ -38,38 +40,40 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  // get filteredUsers() {
-  //   if (!this.searchTerm) {
-  //     return this.users;
-  //   }
-  //   return this.users.filter(user => {
-  //     const nameToCheck = this.getCurrentName(user);
-  //     return (
-  //       user.PhoneList.some(phone => phone.includes(this.searchTerm)) ||
-  //       (nameToCheck && nameToCheck.toLowerCase().includes(this.searchTerm.toLowerCase()))
-  //     );
-  //   });
-  // }
-
   get filteredUsers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.users.filter(user => {
       const nameToCheck = this.getCurrentName(user);
       const matchesNameOrPhone = !this.searchTerm || user.PhoneList.some(phone => phone.includes(this.searchTerm)) ||
         (nameToCheck && nameToCheck.toLowerCase().includes(this.searchTerm.toLowerCase()));
       const matchesRole = !this.selectedRoleId || user.RoleId.toString() === this.selectedRoleId;
       return matchesNameOrPhone && matchesRole;
-    });
+    }).slice(startIndex, startIndex + this.itemsPerPage);
   }
-  filterByRole() {
-    // This method can be expanded if additional logic is required when the role changes
-  }
-  // In your component class
-  getCurrentName(user: any): string {
+
+  getCurrentName(user: User): string {
     const currentLang = this.authService.getCurrentLanguage();
     return currentLang === 'ar' ? user.NameAr : user.NameEn;
   }
+
   openModal() {
     this.modalService.open(this.addUserModal);
+  }
+
+  nextPage() {
+    const totalItems = this.filteredUsers.length;
+    // if (this.currentPage <= totalItems) { // Simplified condition
+    // }
+    this.currentPage++;
+}
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  filterByRole() {
+
   }
 
 }

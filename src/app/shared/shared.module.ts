@@ -14,6 +14,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor/token.interceptor';
 import { AuthInterceptorService } from '../core/interceptors/response-interceptor/auth-interceptor.service';
 import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loader.interceptor';
+import { IsEmptyComponent } from './components/is-empty/is-empty.component';
 
 
 
@@ -22,7 +23,8 @@ import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loade
     SwitchLanguageComponent,
     InputPasswordComponent,
     InputFiledComponent,
-    LoadingComponent
+    LoadingComponent,
+    IsEmptyComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loade
     TranslateModule,
 
 
+
   ],
   exports: [SwitchLanguageComponent,
     CommonModule,
@@ -43,6 +46,7 @@ import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loade
     LoadingComponent,
     FormsModule,
     ReactiveFormsModule,
+    IsEmptyComponent
   ],
   providers: [
     TranslationService,

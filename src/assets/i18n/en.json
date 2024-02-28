@@ -45,6 +45,7 @@
   "forgotpasswordMsg": "A temporary password has been sent to your mobile via SMS.",
   "confirm": "Confirm",
   "guest": "Guest",
-  "usernameOrMobile": "Username or Mobile"
+  "usernameOrMobile": "Username or Mobile",
+  "userEmpty":"Your users is empty"
 
 }
