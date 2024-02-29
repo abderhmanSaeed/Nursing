@@ -20,9 +20,7 @@
   "discard": "Discard",
   "additionalInfo": "Additional Info",
   "Days": "Days",
-
   "copyright": "nursing Business Solutions  All Rights Reserved.",
-
   "needHelp": "Need Help",
   "contactUs": "Contact Us",
   "helpCenter": "Help Center",
@@ -46,6 +44,24 @@
   "confirm": "Confirm",
   "guest": "Guest",
   "usernameOrMobile": "Username or Mobile",
-  "userEmpty":"Your users is empty"
-
+  "userEmpty": "Your users is empty",
+  "number": "#",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "actions": "Actions",
+  "edit": "Edit",
+  "delete": "Delete",
+  "selectRole": "Select Role",
+  "admin": "Admin",
+  "employee": "Employee",
+  "addUser": "Add User",
+  "user": "Users",
+  "of": "Of",
+  "enterName": "Enter name",
+  "enterEmail": "Enter email",
+  "close": "Close",
+  "saveChanges": "Save changes",
+  "previous": "Previous",
+  "next": "Next"
 }
