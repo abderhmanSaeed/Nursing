@@ -1,0 +1,54 @@
+<!-- <section class="header-page mb-24" [class.mb-40]="isShowDetails" class="flex">
+  <div class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <app-switch-language></app-switch-language>
+
+        <button type="button" *ngIf="isAuthenticated"
+            class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
+            (click)="logout()">
+            {{"Logout" | translate}}
+          </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user">users</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+</section> -->
+<h1>This Is Header</h1>
+<div class="topbar">
+  <div class="page-title">Dashboard</div>
+  <ul class="navbar-nav topnav">
+    <li class="nav-item notification">
+      <a class="nav-link px-3" href="#">
+        <i class="fa-regular fa-bell"></i>
+      </a>
+    </li>
+    <li class="nav-item user dropdown" *ngIf="isAuthenticated">
+      <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <h5 class="text-start">Mohamed Abd al-Sattar<span class="d-block">Super Admin</span></h5>
+      
+      </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">My Profile</a></li>
+          <li><a class="dropdown-item" href="#">My Tasks</a></li>
+          <li><a class="dropdown-item logout" href="#">Logout</a></li>
+        </ul>
+    </li>
+    <li class="nav-item lang dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        En <i class="ms-2 fa-solid fa-globe"></i>
+      </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">English</a></li>
+          <li><a class="dropdown-item" href="#">Belgian</a></li>
+          <li><a class="dropdown-item" href="#">Arabic</a></li>
+        </ul>
+    </li>
+  </ul>
+</div>

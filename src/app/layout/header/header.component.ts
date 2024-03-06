@@ -4,11 +4,11 @@ import { CONFIG } from '../../shared/configs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrl: './nav.component.scss'
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
 })
-export class NavComponent {
+export class HeaderComponent {
    isShowDetails: boolean = true;
 
   isAuthenticated = this.authService.isAuth();
@@ -16,7 +16,9 @@ export class NavComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    ) { }
+    ) { 
+      debugger;
+    }
 
   logout() {
     // Call the logout method from AuthService
