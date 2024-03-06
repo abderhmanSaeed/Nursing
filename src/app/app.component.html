@@ -1,2 +1,50 @@
-<router-outlet></router-outlet>
+<div class="page-container">
+  <aside class="sidebar">
+    <div class="logo"><img src="../assets/images/nursing-logo.svg" class="img-fluid" alt=""></div>
+  </aside>
+  <div class="content">
+    <header>
+      <div class="topbar">
+        <div class="page-title">Dashboard</div>
+        <ul class="navbar-nav topnav">
+          <li class="nav-item notification">
+            <a class="nav-link px-3" href="#">
+              <i class="fa-regular fa-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item user dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <h5 class="text-start">Mohamed Abd al-Sattar<span class="d-block">Super Admin</span></h5>
+              <figure>
+                <img src="../assets/img/bg-masthead.jpg" class="img-fluid" alt="">
+              </figure>
+            </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">My Tasks</a></li>
+                <li><a class="dropdown-item logout" href="#">Logout</a></li>
+              </ul>
+          </li>
+          <li class="nav-item lang dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              En <i class="ms-2 fa-solid fa-globe"></i>
+            </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">English</a></li>
+                <li><a class="dropdown-item" href="#">Belgian</a></li>
+                <li><a class="dropdown-item" href="#">Arabic</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit asperiores iste voluptatibus id. Dolor
+        assumenda velit provident earum? Autem nesciunt perferendis, voluptates asperiores labore quidem consectetur
+        error nobis quae. Aliquam!</p>
+    </main>
+  </div>
 
+  <!-- <router-outlet></router-outlet> -->
+</div>
+<!-- <router-outlet></router-outlet> -->

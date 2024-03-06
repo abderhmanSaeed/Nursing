@@ -15,6 +15,7 @@ import { TokenInterceptor } from '../core/interceptors/auth-interceptor/token.in
 import { AuthInterceptorService } from '../core/interceptors/response-interceptor/auth-interceptor.service';
 import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loader.interceptor';
 import { IsEmptyComponent } from './components/is-empty/is-empty.component';
+import { FilterUsersPipe } from './pipes';
 
 
 
@@ -24,7 +25,8 @@ import { IsEmptyComponent } from './components/is-empty/is-empty.component';
     InputPasswordComponent,
     InputFiledComponent,
     LoadingComponent,
-    IsEmptyComponent
+    IsEmptyComponent,
+    FilterUsersPipe
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,9 @@ import { IsEmptyComponent } from './components/is-empty/is-empty.component';
     LoadingComponent,
     FormsModule,
     ReactiveFormsModule,
-    IsEmptyComponent
+    IsEmptyComponent,
+    FilterUsersPipe
+
   ],
   providers: [
     TranslationService,

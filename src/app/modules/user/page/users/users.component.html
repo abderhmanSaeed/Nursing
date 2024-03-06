@@ -10,30 +10,32 @@
           </div>
           <div class="filter-section">
             <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
-              <option value="">Select Role</option>
-              <option value="1">Admin</option>
-              <option value="2">Employee</option>
+              <option value="" translate="selectRole"></option>
+              <option value="1" translate="admin"></option>
+              <option value="2" translate="employee"></option>
+
             </select>
           </div>
 
           <div class="mb-3">
             <button type="button" class="btn btn-primary" (click)="openModal()">
-              Add User
+              {{"addUser" | translate}}
             </button>
           </div>
           <div class="text-center mb-2">
-            User {{ (currentPage-1) * itemsPerPage + 1 }} of {{ users.length }}
+            {{"user" | translate}} {{ (currentPage-1) * itemsPerPage + 1 }} {{"of" | translate}} {{ users.length }}
           </div>
 
           <!-- Existing table -->
           <table class="table" *ngIf="filteredUsers.length > 0; else isEmpty">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Actions</th>
+                <th scope="col">{{ 'number' | translate }}</th>
+                <th scope="col">{{ 'name' | translate }}</th>
+                <th scope="col">{{ 'email' | translate }}</th>
+                <th scope="col">{{ 'phone' | translate }}</th>
+                <th scope="col">{{ 'actions' | translate }}</th>
+
               </tr>
             </thead>
             <tbody>
@@ -44,8 +46,9 @@
                 <td>{{ user.PhoneList[0] }}</td>
                 <td>
                   <!-- Actions like Edit or Delete -->
-                  <button class="btn btn-primary btn-sm">Edit</button>
-                  <button class="btn btn-danger btn-sm">Delete</button>
+                  <button class="btn btn-primary btn-sm">{{ 'edit' | translate }}</button>
+                  <button class="btn btn-danger btn-sm">{{ 'delete' | translate }}</button>
+
                 </td>
               </tr>
             </tbody>
@@ -60,10 +63,10 @@
   <nav *ngIf="users.length > 1">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="currentPage === 1">
-        <a class="page-link" href="#" (click)="previousPage(); $event.preventDefault()">Previous</a>
+        <a class="page-link" href="#" (click)="previousPage(); $event.preventDefault()">{{"previous" | translate}}</a>
       </li>
       <li class="page-item" [class.disabled]="currentPage === users.length">
-        <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">Next</a>
+        <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">{{"next" | translate}}</a>
       </li>
     </ul>
   </nav>
@@ -71,7 +74,7 @@
   <!-- Modal -->
   <ng-template #addUserModal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">Add User</h4>
+      <h4 class="modal-title"> {{"addUser" | translate}}</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -79,18 +82,21 @@
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <label for="userName">Name</label>
-          <input type="text" class="form-control" id="userName" placeholder="Enter name">
+          <label for="userName">{{ 'name' | translate }}</label>
+          <input type="text" class="form-control" id="userName" [placeholder]="'enterName' | translate">
         </div>
         <div class="form-group">
-          <label for="userEmail">Email address</label>
-          <input type="email" class="form-control" id="userEmail" placeholder="Enter email">
+          <label for="userEmail">{{ 'email' | translate }}</label>
+          <input type="email" class="form-control" id="userEmail" [placeholder]="'enterEmail' | translate">
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+        {{ 'close' | translate }}</button>
+      <button type="button" class="btn btn-primary">{{ 'saveChanges' | translate }}</button>
+
+
     </div>
   </ng-template>
   <!-- if the cart is empaty  -->
