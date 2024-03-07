@@ -17,15 +17,16 @@ p {
 
   // overflow: hidden;
   aside {
-    flex: 0 0 100px;
-    max-width: 100px;
-    padding: 15px;
+    // flex: 0 0 100px;
+    // max-width: 100px;
+    // padding: 15px;
   }
 
   .content {
     border-radius: 25px;
     background: $gradient_bg;
     padding: 0px 30px;
+    width: 100%;
 
     header {
       padding: 15px 0;
@@ -149,6 +150,80 @@ p {
           font-weight: 700;
         }
       }
+    }
+  }
+}
+
+
+
+.progressbar {
+  .item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .circle {
+      height: 100px;
+      flex: 0 0 100px;
+      max-width: 100px;
+      border-radius: 50%;
+      margin-inline-end: 15px;
+    }
+
+    h3 {
+      font-size: 18px;
+      color: $dark_cyan;
+    }
+
+    &.orange {
+      .circle {
+        border: 5px solid #F0851D;
+      }
+    }
+
+    &.cyan {
+      .circle {
+        border: 5px solid $dark_cyan;
+      }
+    }
+
+    &.black {
+      .circle {
+        border: 5px solid $black;
+      }
+    }
+
+    &.blue {
+      .circle {
+        border: 5px solid #15A0C9;
+      }
+    }
+  }
+}
+
+.cards {
+  .item {
+    background: $white url('../src/assets/images/card-bg.svg') no-repeat right/cover;
+    padding: 50px;
+    display: flex;
+    border-radius: 25px;
+    align-items: center;
+    .icon{
+      margin-inline-end: 50px;
+      height: 75px;
+      width: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        max-height: 100%;
+      }
+    }
+    h4{
+      color: $dark_cyan;
+    }
+    p{
+      margin: 0;
     }
   }
 }
