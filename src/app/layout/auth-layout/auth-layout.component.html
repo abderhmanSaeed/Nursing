@@ -16,16 +16,26 @@
 </div> -->
 
 <div class="auth-container">
-  <div class="container">
+  <div class="container p-0">
     <div class="row g-0">
-      <div class="g-0 col-md-6 text-center auth-form">
-        <div class="d-flex align-items-center h-100 justify-content-center">
+      <div class="col-md-6 auth-form">
+        <div class="form-container">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="g-0 col-md-6 text-center auth-bg-side">
+      <div class="px-0 col-md-6 text-center auth-bg-side">
+        <div class="lang-dropdown dropdown">
+          <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            En <i class="ms-2 fa-solid fa-globe"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">English</a></li>
+            <li><a class="dropdown-item" href="#">Belgian</a></li>
+            <li><a class="dropdown-item" href="#">Arabic</a></li>
+          </ul>
+        </div>
         <div class="d-flex align-items-center h-100 justify-content-center">
-          <img src="../../../assets/images/nursing-login-logo.svg" class="img-fluid" alt="">
+          <img src="../../../assets/images/nursing-login-logo.svg" class="logo img-fluid" alt="">
         </div>
       </div>
     </div>

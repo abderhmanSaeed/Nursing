@@ -1,31 +1,32 @@
-<div class="container mt-5">
-  <h1>This is my login screen</h1>
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="text-center">{{"login" |translate}}</h3>
-        </div>
-        <div class="card-body">
-            <div class="mb-3">
-              <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                [name]="'usernameOrMobile'" [type]="'text'"
-                [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
-                (nameChanged)="handleNameChange($event)" [required]="true">
-              </app-input-filed>
-            </div>
-            <div class="mb-3">
-              <app-input-password [label]="'Password' | translate" [placeholder]="'Password' | translate"
-                [name]="'password'" [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
-                (valueChange)="handlePasswordChange($event)" [required]="true">
-              </app-input-password>
-            </div>
-            <div class="d-grid gap-2">
-              <button (click)="handleLogin()" class="btn btn-primary">{{"login" | translate}}</button>
-            </div>
-
-        </div>
+<div>
+  <h1>Login</h1>
+  <p>Reference site about Lorem Ipsum, giving information
+    on its origins</p>
+    <div class="mb-3">
+      <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
+        [name]="'usernameOrMobile'" [type]="'text'"
+        [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+        (nameChanged)="handleNameChange($event)" [required]="true">
+      </app-input-filed>
+    </div>
+    <div class="mb-3">
+      <app-input-password [label]="'Password' | translate" [placeholder]="'Password' | translate"
+        [name]="'password'" [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+        (valueChange)="handlePasswordChange($event)" [required]="true">
+      </app-input-password>
+    </div>
+    <div class="mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Remember Me
+        </label>
       </div>
     </div>
-  </div>
+    <div class="mb-5">
+      <button (click)="handleLogin()" class="btn btn-primary">{{"login" | translate}}</button>
+    </div>
+    <div class="text-center">
+      <a href="#">Forget Your Password ?</a>
+    </div>
 </div>

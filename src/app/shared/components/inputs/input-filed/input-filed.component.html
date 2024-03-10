@@ -1,11 +1,11 @@
 <div class="mb-3 {{ classes?.base }} input-container" [class.floating-label]="isFloating">
-  <label *ngIf="!isFloating" [for]="name" [ngClass]="{ 'text-blue-900': !classes?.labelColor }"
-    class="block mb-2 text-sm font-medium  {{ classes?.label }}">
+  <label *ngIf="!isFloating" [for]="name"
+    class="d-block w-100 mb-2">
     {{ label }}
     <span class="text-red-500" *ngIf="required"> * </span>
   </label>
 
-  <div class="relative">
+  <div class="relative w-100">
     <input title="{{name}}" [type]="type" [id]="name" required [placeholder]="placeholder"
       [disabled]="isUserNameAvailable && DefaultName" [required]="required" [name]="name" [value]="value"
       class="{{ classes?.input }} w-full placeholder:text-sm placeholder:my-10" [ngClass]="{

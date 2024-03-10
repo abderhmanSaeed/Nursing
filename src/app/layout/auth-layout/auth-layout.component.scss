@@ -1,10 +1,100 @@
 @import "../../../variable";
+:host{
+  display: flex;
+    width: 100%;
+}
+.auth-container {
+  max-width: 100%;
+  width: 1000px;
+  margin: 0 auto;
+  border-radius: 30px;
+  overflow: hidden;
+  background: $white;
+  &::ng-deep h1{
+    font-size: 26px;
+    color: $dark_cyan;
+    font-weight: 700;
+  }
+  &::ng-deep p{
+    color: $black;
+  }
+.auth-form{
+  padding: 50px 15px;
+  .form-container{
+    width: 350px;
+    max-width: 100%;
+    margin: 0 auto;
 
-.auth-container{
-  .auth-form{
+  }
+}
+  .auth-form {
     background: $white;
   }
-  .auth-bg-side{
-    background: rgba($lighten_cyan,0.2);
+
+  .auth-bg-side {
+    background: rgba($lighten_cyan, 0.2) url('../../../assets/images/login-logo-bg.png') no-repeat bottom left;
+    background-size: 300px;
+    position: relative;
+    .logo{
+      height: 200px;
+    }
+    .lang-dropdown{
+      position: absolute;
+      right: 40px;
+      top: 30px;
+      &.dropdown {
+        .dropdown-toggle {
+          &:after {
+            margin: 0;
+            border: solid $dark_cyan;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            // margin-inline-end: -15px;
+            margin-inline-start: 10px;
+            transition: all ease 0.3s;
+          }
+
+          &.show {
+            &:after {
+              transform: rotate(225deg);
+              -webkit-transform: rotate(225deg);
+            }
+          }
+        }
+
+        .dropdown-menu {
+          border: none;
+          color: $dark_cyan;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0,0,0,0.1);
+          li {
+            border-bottom: 1px solid rgba($dark_cyan, 0.2);
+
+            a {
+              padding: 10px;
+              color: $dark_cyan;
+              border-radius: 0;
+
+              &:hover {
+                background: rgba($dark_cyan, 0.1);
+              }
+            }
+
+            &:last-child {
+              border: 0;
+            }
+          }
+
+
+        }
+      }
+      a{
+        text-decoration: none;
+      }
+    }
   }
 }

@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentLayoutComponent implements OnInit{
   ngOnInit(): void {
-    document.body.style.background = "#CFE7DF";
+    // document.body.style.background = "#CFE7DF";
+    document.body.classList.remove('auth-pages');
   }
 }
 
