@@ -16,8 +16,8 @@ export class SideBarComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    ) { 
-      debugger;
+    ) {
+      // debugger;
     }
 
   logout() {

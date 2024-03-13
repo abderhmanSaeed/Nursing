@@ -57,7 +57,7 @@ export class UsersComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open(this.addUserModal);
+    this.modalService.open(this.addUserModal, { size: 'lg' });
   }
 
   nextPage() {
