@@ -253,7 +253,13 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label for="userName" class="d-block w-100 mb-2">Role</label>
-                <input type="text" class="form-control" id="userName">
+                <ng-select [items]="options"
+                [multiple]="true"
+                [searchable]="true"
+                placeholder="Select options"
+                [(ngModel)]="selectedOptions"
+                (change)="onSelectionChange()">
+              </ng-select>
               </div>
             </div>
             <div class="col-lg-6">

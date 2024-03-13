@@ -16,6 +16,8 @@ import { AuthInterceptorService } from '../core/interceptors/response-intercepto
 import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loader.interceptor';
 import { IsEmptyComponent } from './components/is-empty/is-empty.component';
 import { FilterUsersPipe } from './pipes';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -31,12 +33,12 @@ import { FilterUsersPipe } from './pipes';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     RouterModule,
     CoreModule,
     HttpClientModule,
     TranslateModule,
-
+    NgSelectModule,
+    ReactiveFormsModule
 
 
   ],
@@ -49,8 +51,8 @@ import { FilterUsersPipe } from './pipes';
     FormsModule,
     ReactiveFormsModule,
     IsEmptyComponent,
-    FilterUsersPipe
-
+    FilterUsersPipe,
+    NgSelectModule
   ],
   providers: [
     TranslationService,

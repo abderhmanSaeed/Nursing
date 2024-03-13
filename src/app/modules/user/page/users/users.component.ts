@@ -19,6 +19,11 @@ export class UsersComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 1; // Show one user per page
 
+  options = ['Option 1', 'Option 2', 'Option 3'];
+  selectedOptions: string[] = [];
+
+  
+
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -67,7 +72,11 @@ export class UsersComponent implements OnInit {
     this.currentPage++;
 }
 
-  previousPage() {
+onSelectionChange(): void {
+  console.log(this.selectedOptions); // Do something with the selected values
+}
+
+previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
