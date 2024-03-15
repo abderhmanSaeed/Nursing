@@ -37,6 +37,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         path: CONFIG.user.route.substring(1),
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
+      },
+      {
+        canActivate: [AuthGuard],
+        path: CONFIG.request.route.substring(1),
+        loadChildren: () => import('./modules/request/request.module').then(m => m.RequestModule)
       }
     ]
   },
