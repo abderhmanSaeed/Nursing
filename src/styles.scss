@@ -54,26 +54,20 @@ a {
 
 .btn {
   padding-inline: 40px;
-  border-color: $dark_cyan;
   outline: none !important;
   box-shadow: none !important;
 
-  &:hover {
-    border-color: $dark_cyan;
-  }
 
-  &:focus {
-    border-color: $dark_cyan;
-  }
-
-  &:active {
-    border-color: $dark_cyan;
-  }
 
   &.btn-primary {
+    border-color: $dark_cyan;
     background: $dark_cyan;
+    &:hover {
+      border-color: $dark_cyan;
+    }
 
     &:focus {
+      border-color: $dark_cyan;
       background: $dark_cyan;
     }
 
@@ -85,7 +79,7 @@ a {
 
   &.btn-outline-primary {
     color: $dark_cyan;
-
+    border-color: $dark_cyan;
     &:hover {
       background: $lighten_cyan;
       border-color: $lighten_cyan;

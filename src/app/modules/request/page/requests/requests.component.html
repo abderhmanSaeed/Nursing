@@ -1,192 +1,208 @@
 <main>
-  <!-- user-list.component.html -->
-  <div class="card border-0 p-3 rounded-4 mb-3">
-    <div class="card-body">
-      <div class="accordion accordion-style-1" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Search
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <form action="">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
-                        </app-input-filed>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
-                        </app-input-filed>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="d-flex justify-content-end">
-                      <button type="button" class="btn btn-primary">Search</button>
-                    </div>
-                  </div>
-                </div>
 
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="card border-0 p-3 rounded-4">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-          <h5 class="card-title">My Requests</h5>
-          <p class="card-subtitle">More than 400+ new members</p>
+          <h5 class="card-title">My Requests Today</h5>
         </div>
       </div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Full Name</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Role</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Address</th>
-              <th scope="col">Avaiablility</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
-              <td>01125035096</td>
-              <td>Super Admin-
-                Employee</td>
-              <td>Male</td>
-              <td>54 - Madinaty -
-                First Settlement</td>
-              <td>
-                <ul class="dayes">
-                  <li>Sun</li>
-                  <li>Mon</li>
-                  <li>Tue</li>
-                  <li>Thu</li>
-                  <li>Fri</li>
-                  <li>Sat</li>
-                </ul>
-              </td>
-              <td>
-                <ul class="action">
-                  <li>
-                    <a href="#"><i class="fa-regular fa-copy"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
-              <td>01125035096</td>
-              <td>Super Admin-
-                Employee</td>
-              <td>Male</td>
-              <td>54 - Madinaty -
-                First Settlement</td>
-              <td>
-                <ul class="dayes">
-                  <li>Sun</li>
-                </ul>
-              </td>
-              <td>
-                <ul class="action">
-                  <li>
-                    <a href="#"><i class="fa-regular fa-copy"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
-              <td>01125035096</td>
-              <td>Super Admin-
-                Employee</td>
-              <td>Male</td>
-              <td>54 - Madinaty -
-                First Settlement</td>
-              <td>
-                <ul class="dayes">
-                  <li>Sun</li>
-                  <li>Mon</li>
-                  <li>Tue</li>
-                  <li>Thu</li>
-                </ul>
-              </td>
-              <td>
-                <ul class="action">
-                  <li>
-                    <a href="#"><i class="fa-regular fa-copy"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="pagination-wrapper">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination pagination-sm">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="First">
-                <i class="fa-solid fa-angles-left"></i>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <i class="fa-solid fa-chevron-left"></i>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <i class="fa-solid fa-chevron-right"></i>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Last">
-                <i class="fa-solid fa-angles-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div class="requests-wrapper">
+        <div class="request mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex customer-info">
+              <figure>
+                <img src="../../../../../assets/images/user-avatar.svg" class="img-fluid" alt="">
+              </figure>
+              <div>
+                <h6>Customer Name</h6>
+                <h4>Ahmed Mohamed Ibrahim</h4>
+              </div>
+            </div>
+            <span class="date"><i class="fa-regular fa-calendar-days"></i> 25/2/2024</span>
+          </div>
+          <div class="d-flex gap-5">
+            <div>
+              <div class="sub-title">Order Num</div>
+              <div class="title">001254</div>
+            </div>
+            <div>
+              <div class="sub-title">Service Name</div>
+              <div class="title">Insulin injection</div>
+            </div>
+            <div>
+              <div class="sub-title">Patient Number</div>
+              <div class="title">01555548999</div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-4">
+              <button type="button" class="btn btn-outline-secondary">Heading in progress</button>
+              <button type="button" class="btn btn-outline-primary">Access to the patient</button>
+              <button type="button" class="btn btn-outline-primary">Patient leaving</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="request mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex customer-info">
+              <figure>
+                <img src="../../../../../assets/images/user-avatar.svg" class="img-fluid" alt="">
+              </figure>
+              <div>
+                <h6>Customer Name</h6>
+                <h4>Ahmed Mohamed Ibrahim</h4>
+              </div>
+            </div>
+            <span class="date"><i class="fa-regular fa-calendar-days"></i> 25/2/2024</span>
+          </div>
+          <div class="d-flex gap-5">
+            <div>
+              <div class="sub-title">Order Num</div>
+              <div class="title">001254</div>
+            </div>
+            <div>
+              <div class="sub-title">Service Name</div>
+              <div class="title">Insulin injection</div>
+            </div>
+            <div>
+              <div class="sub-title">Patient Number</div>
+              <div class="title">01555548999</div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-4">
+              <button type="button" class="btn btn-outline-secondary">Heading in progress</button>
+              <button type="button" class="btn btn-outline-primary">Access to the patient</button>
+              <button type="button" class="btn btn-outline-primary">Patient leaving</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="request mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex customer-info">
+              <figure>
+                <img src="../../../../../assets/images/user-avatar.svg" class="img-fluid" alt="">
+              </figure>
+              <div>
+                <h6>Customer Name</h6>
+                <h4>Ahmed Mohamed Ibrahim</h4>
+              </div>
+            </div>
+            <span class="date"><i class="fa-regular fa-calendar-days"></i> 25/2/2024</span>
+          </div>
+          <div class="d-flex gap-5">
+            <div>
+              <div class="sub-title">Order Num</div>
+              <div class="title">001254</div>
+            </div>
+            <div>
+              <div class="sub-title">Service Name</div>
+              <div class="title">Insulin injection</div>
+            </div>
+            <div>
+              <div class="sub-title">Patient Number</div>
+              <div class="title">01555548999</div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-4">
+              <button type="button" class="btn btn-outline-secondary">Heading in progress</button>
+              <button type="button" class="btn btn-outline-primary">Access to the patient</button>
+              <button type="button" class="btn btn-outline-primary">Patient leaving</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="request mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex customer-info">
+              <figure>
+                <img src="../../../../../assets/images/user-avatar.svg" class="img-fluid" alt="">
+              </figure>
+              <div>
+                <h6>Customer Name</h6>
+                <h4>Ahmed Mohamed Ibrahim</h4>
+              </div>
+            </div>
+            <span class="date"><i class="fa-regular fa-calendar-days"></i> 25/2/2024</span>
+          </div>
+          <div class="d-flex gap-5">
+            <div>
+              <div class="sub-title">Order Num</div>
+              <div class="title">001254</div>
+            </div>
+            <div>
+              <div class="sub-title">Service Name</div>
+              <div class="title">Insulin injection</div>
+            </div>
+            <div>
+              <div class="sub-title">Patient Number</div>
+              <div class="title">01555548999</div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-4">
+              <button type="button" class="btn btn-outline-secondary">Heading in progress</button>
+              <button type="button" class="btn btn-outline-primary">Access to the patient</button>
+              <button type="button" class="btn btn-outline-primary">Patient leaving</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="request mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex customer-info">
+              <figure>
+                <img src="../../../../../assets/images/user-avatar.svg" class="img-fluid" alt="">
+              </figure>
+              <div>
+                <h6>Customer Name</h6>
+                <h4>Ahmed Mohamed Ibrahim</h4>
+              </div>
+            </div>
+            <span class="date"><i class="fa-regular fa-calendar-days"></i> 25/2/2024</span>
+          </div>
+          <div class="d-flex gap-5">
+            <div>
+              <div class="sub-title">Order Num</div>
+              <div class="title">001254</div>
+            </div>
+            <div>
+              <div class="sub-title">Service Name</div>
+              <div class="title">Insulin injection</div>
+            </div>
+            <div>
+              <div class="sub-title">Patient Number</div>
+              <div class="title">01555548999</div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-4">
+              <button type="button" class="btn btn-outline-secondary">Heading in progress</button>
+              <button type="button" class="btn btn-outline-primary">Access to the patient</button>
+              <button type="button" class="btn btn-outline-primary">Patient leaving</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
