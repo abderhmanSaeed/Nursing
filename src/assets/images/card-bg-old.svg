@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 545 197" style="enable-background:new 0 0 545 197;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{clip-path:url(#SVGID_4_);}
+	.st2{opacity:0.5;fill:#D8E8D6;enable-background:new    ;}
+</style>
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M25,0h495c13.8,0,25,11.2,25,25v147c0,13.8-11.2,25-25,25H25c-13.8,0-25-11.2-25-25V25C0,11.2,11.2,0,25,0z
+			"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g id="Mask_Group_2" transform="translate(-249.062 -412)" class="st0">
+		<g>
+			<defs>
+				<path id="SVGID_3_" d="M360.2,412c57.3,36.1,85.5,25.9,163.1,79.1c70.8,48.5,81.2,97.4,138.5,117.9h132.2V412H360.2z"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+			</clipPath>
+			<g id="Mask_Group_1" transform="translate(390.654 406.496)" class="st1">
+				<g id="Group_1" transform="translate(-114.096)">
+					<path id="Rectangle_17" class="st2" d="M-22.5,5.5h532c4.4,0,8,3.6,8,8v181c0,4.4-3.6,8-8,8h-532c-4.4,0-8-3.6-8-8v-181
+						C-30.5,9.1-26.9,5.5-22.5,5.5z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

@@ -9,7 +9,9 @@ html {
 body {
   background: $lighten_cyan;
   padding: 50px;
-
+  @media (max-width:992px) {
+    padding: 15px;
+  }
   &.auth-pages {
     background: url('assets/images/auth-bg.jpg') no-repeat center/cover;
 
@@ -147,18 +149,19 @@ input:-webkit-autofill:active {
   main {
     overflow-y: auto;
     height: calc(100vh - 215px);
+    @media (max-width:992px) {
+      height: calc(100vh - 145px);
+    }
   }
-
-
-
-
 
   .content {
     border-radius: 25px;
     background: $gradient_bg;
     padding: 0px 30px;
     width: 100%;
-
+    @media (max-width:992px) {
+      padding: 0px 15px;
+    }
     header {
       padding: 15px 0;
       border-bottom: 1px solid rgba($dark_cyan, 0.2);
@@ -340,7 +343,14 @@ input:-webkit-autofill:active {
     display: flex;
     border-radius: 25px;
     align-items: center;
-
+    @media (max-width:1024px) {
+      padding: 25px;
+    }
+    @media (max-width:767px) {
+      padding: 15px;
+      display: block;
+      text-align: center;
+    }
     .icon {
       margin-inline-end: 50px;
       height: 75px;
@@ -348,7 +358,14 @@ input:-webkit-autofill:active {
       display: flex;
       align-items: center;
       justify-content: center;
-
+      @media (max-width:1024px) {
+        margin-inline-end: 15px;
+      }
+      @media (max-width:767px) {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+      }
       img {
         max-height: 100%;
       }
@@ -356,6 +373,9 @@ input:-webkit-autofill:active {
 
     h4 {
       color: $dark_cyan;
+      @media (max-width:1024px) {
+        font-size: 18px;
+      }
     }
 
     p {

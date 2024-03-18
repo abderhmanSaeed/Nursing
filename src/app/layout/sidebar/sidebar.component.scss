@@ -2,7 +2,10 @@
 :host {
   flex: 0 0 100px;
   max-width: 100px;
-  padding: 15px
+  padding: 15px;
+  @media (max-width:992px) {
+    display: none;
+  }
 }
 .logo{
   margin-bottom: 25px;
