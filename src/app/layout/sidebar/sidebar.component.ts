@@ -20,6 +20,10 @@ export class SideBarComponent {
       // debugger;
     }
 
+    RemoveBodyClass(event:any){
+        event.preventDefault(); 
+        document.body.classList.remove("nav-click-class");
+    }
   logout() {
     // Call the logout method from AuthService
     this.authService.logout();

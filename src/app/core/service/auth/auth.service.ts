@@ -61,15 +61,14 @@ export class AuthService {
 
   getToken(): string | null {
     try {
+      debugger
       const tokenLocalStorage = localStorage?.getItem('token');
       return tokenLocalStorage || null;
-    } catch (error) {
+    } catch (error) {debugger
       console.error('Error accessing localStorage:', error);
       return null;
     }
   }
-
-
 
   setRefreshToken(token: string): void {
     return localStorage.setItem('refresh_token', token);

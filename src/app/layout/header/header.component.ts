@@ -30,4 +30,8 @@ export class HeaderComponent {
     window.location.reload();
 
   }
+  addBodyClass(event:any){
+    event.preventDefault(); 
+    document.body.classList.add("nav-click-class");
+  }
 }
