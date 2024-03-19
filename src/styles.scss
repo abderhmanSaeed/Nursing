@@ -5,7 +5,14 @@ body,
 html {
   height: 100%;
 }
-
+html{
+  &:dir(rtl){
+    .lang-dropdown{
+      right: auto !important;
+      left: 40px;
+    }
+  }
+}
 body {
   background: $lighten_cyan;
   padding: 50px;
