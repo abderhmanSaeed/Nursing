@@ -31,7 +31,7 @@ export class HeaderComponent {
 
   }
   addBodyClass(event:any){
-    event.preventDefault(); 
-    document.body.classList.add("nav-click-class");
+    event.preventDefault();
+    document.body.classList.add("open-nav");
   }
 }

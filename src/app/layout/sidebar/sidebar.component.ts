@@ -21,8 +21,8 @@ export class SideBarComponent {
     }
 
     RemoveBodyClass(event:any){
-        event.preventDefault(); 
-        document.body.classList.remove("nav-click-class");
+        event.preventDefault();
+        document.body.classList.remove("open-nav");
     }
   logout() {
     // Call the logout method from AuthService
