@@ -9,7 +9,7 @@ export class APIs {
 
 
     // Auth APIs
-    public static login = '/User/SignIn';
+    public static login = '/Account/SignIn';
 
 
 

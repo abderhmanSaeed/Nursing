@@ -16,7 +16,9 @@ export class LoginComponent {
   password: string = '';
   constructor(private loginService: LoginService, private authService: AuthService,
     private router: Router,
-  ) { }
+  ) { 
+    this.updateMessage();
+  }
 
 
   handleNameChange(event: any) {
@@ -56,5 +58,38 @@ export class LoginComponent {
         // Handle HTTP errors here
       }
     });
+  }
+
+
+   // Using var
+   varVariable: string = 'Hello, var!';
+  
+   updateMessageVar() {
+     var varVariable = 'Updated var!';
+     this.message = varVariable;
+   }
+ 
+   // Using let
+   letVariable: string = 'Hello, let!';
+   
+   updateMessageLet() {
+     let letVariable = 'Updated let!';
+     this.message = letVariable;
+   }
+ 
+   // Using const
+   constVariable: string = 'Hello, const!';
+   
+   updateMessageConst() {
+     // constVariable = 'Updated const!'; // Error: Cannot assign to 'constVariable' because it is a constant.
+     this.message = this.constVariable;
+   }
+   message: string = this.varVariable;
+
+   updateMessage() {
+    console.log(this.message);
+    this.updateMessageVar();
+    // this.updateMessageLet();
+    // this.updateMessageConst();
   }
 }
