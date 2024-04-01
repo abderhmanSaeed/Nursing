@@ -11,7 +11,7 @@ export class FilterUsersPipe implements PipeTransform {
     if (!searchTerm && !selectedRoleId) return users;
 
     return users.filter(user => {
-      const matchesNameOrPhone = !searchTerm || user.PhoneList.some(phone => phone.includes(searchTerm)) ||
+      const matchesNameOrPhone = !searchTerm || user.Phones.some(phone => phone.includes(searchTerm)) ||
         (user.NameEn && user.NameEn.toLowerCase().includes(searchTerm.toLowerCase())) ||
         (user.NameAr && user.NameAr.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesRole = !selectedRoleId || user.RoleId.toString() === selectedRoleId;

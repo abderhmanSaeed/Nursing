@@ -2,10 +2,13 @@
   <!-- user-list.component.html -->
   <div class="card border-0 p-3 rounded-4 mb-3">
     <div class="card-body">
+      <div *ngIf="showCopiedMessage" class="copied-message">{{"linkCopied" | translate}}</div>
+
       <div class="accordion accordion-style-1" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               Search
             </button>
           </h2>
@@ -16,18 +19,52 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
+                        <app-input-filed [label]="'usernameOrMobile' | translate"
+                          [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
+                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                          (nameChanged)="handleInputChange($event)">
                         </app-input-filed>
+                        <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()" bindLabel="name" bindValue="id">
+                          <ng-option [value]="">selectRole</ng-option>
+                          <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
+                        </ng-select> -->
+                        {{selectedRoleId | json}}
+                        <!-- <ng-select [(ngModel)]="selectedRoleId" (ngModelChange)="filterByRole()">
+                          <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
+                        </ng-select> -->
+
+                        <ng-select
+        id="selectedRoleId"
+        [items]="Roles"
+        bindLabel="name"
+        bindValue="userId"
+        [searchable]="true"
+        placeholder="select Role"
+        (change)="onSellerSelected($event)"
+        class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
+      >
+      </ng-select>
+
+
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
+                        <!-- <app-input-filed [label]="'usernameOrMobile' | translate"
+                          [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
-                        </app-input-filed>
+                        </app-input-filed> -->
+
+                        <div class="filter-section">
+                          <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+                            <option value="" translate="selectRole"></option>
+                            <option value="1" translate="admin"></option>
+                            <option value="2" translate="employee"></option>
+
+                          </select> -->
+
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -54,22 +91,70 @@
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addUser" | translate}}</button>
+        <!-- {{roles | json}} -->
+        <!-- {{Services | json}} -->
+        <!-- {{Shifts | json}} -->
       </div>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Full Name</th>
+              <!-- <th scope="col">Full Name</th>
               <th scope="col">Phone</th>
               <th scope="col">Role</th>
               <th scope="col">Gender</th>
               <th scope="col">Address</th>
               <th scope="col">Avaiablility</th>
-              <th scope="col">Action</th>
+              <th scope="col">Action</th> -->
+
+              <th scope="col">{{ 'number' | translate }}</th>
+              <th scope="col">{{ 'name' | translate }}</th>
+              <th scope="col">{{ 'email' | translate }}</th>
+              <th scope="col">{{ 'Role' | translate }}</th>
+              <th scope="col">{{ 'phone' | translate }}</th>
+              <th scope="col">{{ 'Gender' | translate }}</th>
+              <th scope="col">{{ 'Address' | translate }}</th>
+              <th scope="col">{{ 'actions' | translate }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+
+            <tr *ngFor="let user of filteredUsers; let i = index">
+              <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
+              <td>{{ user?.FullName }}</td>
+              <td>{{ user?.Email }}</td>
+              <td>
+                <span *ngIf="user?.Roles && user.Roles.length > 0">
+                  <span *ngFor="let role of user.Roles; let last = last">
+                    {{ role }}
+                    <span *ngIf="!last">, </span>
+                  </span>
+                </span>
+              </td>
+
+              <td>{{ user.Phones[0] }}</td>
+              <td>{{ user.IsMale ? ('male' | translate) : ('female' | translate) }}</td>
+              <td>{{ user?.UserLocation }}</td>
+
+              <td>
+                <ul class="action">
+                  <!-- <li >
+                    <a  (click)="copyUser(user)">
+                      <i class="fa-regular fa-copy cursor-pointer-on-hover"></i>
+                    </a>
+                  </li> -->
+
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+
+            <!-- <tr>
               <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
               <td>01125035096</td>
               <td>Super Admin-
@@ -157,7 +242,7 @@
                   </li>
                 </ul>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -285,6 +370,12 @@
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
+                <label for="nationalId" class="d-block w-100 mb-2">National Id</label>
+                <input type="text" class="form-control" id="nationalId">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
                 <label for="userName" class="d-block w-100 mb-2">Phone (1)</label>
                 <input type="text" class="form-control" id="userName">
               </div>
@@ -298,10 +389,13 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label for="userName" class="d-block w-100 mb-2">Role</label>
-                <ng-select [items]="options" [searchable]="false" [(ngModel)]="selectedOptions"
-                  (change)="onSelectionChange()">
+                <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [(ngModel)]="selectedRoles"
+                  (change)="onSelectionRolesChange()">
                 </ng-select>
               </div>
+
+
+
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
@@ -326,8 +420,8 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label for="userName" class="d-block w-100 mb-2">Services</label>
-                <ng-select [items]="options" [multiple]="true" [searchable]="true" [(ngModel)]="selectedOptions"
-                  (change)="onSelectionChange()">
+                <ng-select [items]="Services" [multiple]="true" [searchable]="true" [(ngModel)]="selectedServices"
+                  (change)="onSelectionServicesChange()">
                 </ng-select>
               </div>
             </div>

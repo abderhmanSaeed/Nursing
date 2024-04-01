@@ -25,7 +25,7 @@
   "contactUs": "Contact Us",
   "helpCenter": "Help Center",
   "faQ": "FAQ",
-  "linkCopied": "Link copied!",
+  "linkCopied": "User copied!",
   "login": "Login",
   "hello": "Hello!",
   "welcomeMsg": "Welcome back, Login to Continue",
@@ -63,5 +63,13 @@
   "close": "Close",
   "saveChanges": "Save changes",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "male":"Male",
+  "female":"female",
+  "Gender": "Gender",
+  "Address": "Address",
+  "Role": "Role"
+
+
+
 }
