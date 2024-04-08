@@ -22,6 +22,9 @@ export interface User {
   Email: string;
   Activated: boolean | null;
   AttendanceCount: number;
+  RoleIds: string[]; // Add RoleIds property
+  WorksingDays: any[];
+
 }
 
 // Optionally, if you want to specifically type the 'Data' field for the GetAllUsers response:

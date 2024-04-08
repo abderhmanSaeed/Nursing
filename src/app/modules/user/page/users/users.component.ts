@@ -5,6 +5,8 @@ import { AuthService } from '../../../../core/service/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LookupsService } from '../../../../data/service/lookups.service';
 declare var bootstrap: any; // Declare bootstrap to use Bootstrap's JS
+import { Days } from '../../../../shared/Enums';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -12,6 +14,7 @@ declare var bootstrap: any; // Declare bootstrap to use Bootstrap's JS
   styleUrl: './users.component.scss'
 })
 export class UsersComponent implements OnInit {
+
   @ViewChild('addUserModal') addUserModal: TemplateRef<any> | undefined;
 
   users: User[] = [];
@@ -20,24 +23,156 @@ export class UsersComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10; // Show one user per page
 
-  options = ['Option 1', 'Option 2', 'Option 3'];
+  genders = ['Male', 'Female'];
   selectedOptions: string[] = [];
   selectedRoles: string[] = [];
-  selectedServices: string[] = [];
+  selectedServices: any[] = [];
+  selectedShifts: any[] = [];
   tenantId = 'cc17f35c-e68e-4731-afd7-890ca46f741d'; // Example tenantId
   showCopiedMessage: boolean = false;
   Roles: Lookup[] = [];
   Services: Lookup[] = [];
   Shifts: Lookup[] = [];
+  Days = Days;
+  daysArray: [string, number][]; // Declare daysArray here
 
+  maxStartDate: string;
+  userForm!: FormGroup; // Using definite assignment assertion
+  fullName: string = '';
+  nationalId: string = '';
+  phone1: string = '';
+  phone2: string = '';
+  selectedRole: any;
+  selectedGender: string = '';
+  birthday: string = '';
+  address: string = '';
+  userName: string = '';
+  email: string = '';
+  password: string = '';
+  days: any = {};
+  photo: string = '';
+  user = {
+    fullName: '',
+    nationalId: '',
+    phone1: '',
+    phone2: '',
+    selectedRole: '',
+    selectedGender: '',
+    birthday: '',
+    address: '',
+    userName: '',
+    email: '',
+    password: '',
+    selectedServices: '',
+    selectedShifts: '',
+    days: {},
+    photo: ''
+  };
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal,
-    private lookupsService: LookupsService) { }
+    private lookupsService: LookupsService, private formBuilder: FormBuilder) {
+    // Initialize maxStartDate with today's date
+    const today = new Date();
+    this.maxStartDate = today.toISOString().split('T')[0];
+    this.daysArray = Object.entries(Days);
+  }
 
   ngOnInit() {
     this.getAllUsers();
     this.loadLookups();
+    this.initForm();
+
   }
+
+  initForm(): void {
+    this.userForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      nationalId: ['', Validators.required],
+      tenantId: [this.tenantId],
+      phones1: ['', Validators.required], // Initialize the form array for phones
+      phones2: [''], // Initialize the form array for phones
+      isMale: [true, Validators.required],
+      birthDate: ['', Validators.required],
+      userLocation: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      userName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      roleIds: this.formBuilder.array([]),
+      serviceIds: this.formBuilder.array([]),
+      WorksingDays: this.formBuilder.array([]),
+      WorkingShifts: this.formBuilder.array([]),
+      currentLat: [50.503887],
+      currentLong: [4.469936]
+    });
+  }
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      const formData = this.userForm.value as User;
+      console.log(formData); // You can now send this data to your backend or use it as needed
+    } else {
+      // Handle form validation errors
+    }
+  }
+  // Method to add a new phone control to the phones form array
+  addPhone(): void {
+    (this.userForm.get('phones') as FormArray).push(this.formBuilder.control('', Validators.required));
+  }
+  addUser() {
+    // Dynamically create the user object using values from the console logs
+    const user = {
+      fullName: this.fullName,
+      nationalId: this.nationalId,
+      phones: [this.phone1, this.phone2],
+      isMale: this.selectedGender === "Male",
+      birthDate: this.birthday,
+      userLocation: this.address,
+      email: this.email,
+      userName: this.userName,
+      password: this.password,
+      roleIds: this.selectedRole.map((role: { Id: any; }) => role.Id),
+      serviceIds: this.selectedServices.map(service => service.Id),
+      workingShifts: this.selectedShifts.map(shift => shift.Id),
+      worksingDays: Object.keys(this.days).filter(day => this.days[day]).map(day => {
+        switch (day) {
+          case 'Mon':
+            return 1;
+          case 'Tue':
+            return 2;
+          case 'Wed':
+            return 3;
+          case 'Thu':
+            return 4;
+          case 'Fri':
+            return 5;
+          case 'Sat':
+            return 6;
+          case 'Sun':
+            return 7;
+          default:
+            return null; // Handle unknown days if needed
+        }
+      }).filter(Boolean),      currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
+      currentLong: 4.469936, // Assuming currentLat and currentLong are not available from console logs
+    };
+
+    // Log the dynamically created user object
+    console.log('User object:', user);
+
+    // Call the API to add the user
+    this.userService.addUser(user)
+      .subscribe(
+        (response) => {
+          console.log('User added successfully:', response);
+          // Handle success response
+        },
+        (error) => {
+          console.error('Error adding user:', error);
+          // Handle error response
+        }
+      );
+  }
+
 
   getAllUsers() {
     this.userService.getAllUsers(this.tenantId).subscribe({
@@ -93,15 +228,19 @@ export class UsersComponent implements OnInit {
   }
 
   get filteredUsers() {
-    if (!this.searchTerm) {
+    if (!this.searchTerm && !this.selectedRoleId) {
       return this.users;
     } else {
       return this.users.filter(user =>
-        (user.FullName && user.FullName.toLowerCase().includes(this.searchTerm.toLowerCase())) || // Filter by FullName
-        (user.Phones && user.Phones.some(phone => phone && phone.includes(this.searchTerm))) // Filter by Phones
+        (!this.searchTerm || // If no search term or search term matches
+          (user.FullName && user.FullName.toLowerCase().includes(this.searchTerm.toLowerCase())) || // Filter by FullName
+          (user.Phones && user.Phones.some(phone => phone && phone.includes(this.searchTerm)))) && // Filter by Phones
+        (!this.selectedRoleId || // If no selected role id or user has the selected role id
+          (user.RoleIds && user.RoleIds.includes(this.selectedRoleId)))
       );
     }
   }
+
   copyUser(user: User) {
     const copiedUser = JSON.stringify(user);
 
@@ -152,17 +291,20 @@ export class UsersComponent implements OnInit {
     this.currentPage++;
   }
 
-  onSelectionChange(): void {
-    console.log(this.selectedOptions); // Do something with the selected values
+  onSelectionGenderChange(): void {
+    console.log(this.selectedGender); // Do something with the selected values
   }
   onSelectionRolesChange() {
-    console.log(this.selectedRoles); // Do something with the selected values
+    console.log(this.selectedRole); // Do something with the selected values
   }
   onSelectionServicesChange() {
     console.log(this.selectedServices); // Do something with the selected values
 
   }
+  onSelectionShiftsChange() {
+    console.log(this.selectedShifts); // Do something with the selected values
 
+  }
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -176,8 +318,33 @@ export class UsersComponent implements OnInit {
 
   onSellerSelected(event: any) {
 
-    this.selectedRoleId = event.Id;
+    this.selectedRoleId = event;
     console.log('selected Role Id:', this.selectedRoleId); // event contains the selected seller's data
   }
+  getNameOfDays(dayNumber: number): string {
+    const currentLang = this.authService.getCurrentLanguage();
+    switch (dayNumber) {
+      case Days.Mon:
+        return currentLang === 'en' ? 'Mon' : 'الاثنين';
+      case Days.Tue:
+        return currentLang === 'en' ? 'Tue' : 'الثلاثاء';
+      case Days.Wed:
+        return currentLang === 'en' ? 'Wed' : 'الأربعاء';
+      case Days.Thu:
+        return currentLang === 'en' ? 'Thu' : 'الخميس';
+      case Days.Fri:
+        return currentLang === 'en' ? 'Fri' : 'الجمعة';
+      case Days.Sat:
+        return currentLang === 'en' ? 'Sat' : 'السبت';
+      case Days.Sun:
+        return currentLang === 'en' ? 'Sun' : 'الأحد';
+      default:
+        return '';
+    }
+
+
+  }
+
 
 }
+

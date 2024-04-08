@@ -12,6 +12,7 @@ export class APIs {
 
     // users APIs
     public static getAllUsers = '/Users'; // Ensure this line is added
+    public static addUser = '/Users'; // Ensure this line is added
 
 
     // lookup APIs

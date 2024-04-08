@@ -16,7 +16,6 @@ import { AuthInterceptorService } from '../core/interceptors/response-intercepto
 import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loader.interceptor';
 import { IsEmptyComponent } from './components/is-empty/is-empty.component';
 import { FilterUsersPipe } from './pipes';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
@@ -38,8 +37,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HttpClientModule,
     TranslateModule,
     NgSelectModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
 
   ],
   exports: [SwitchLanguageComponent,
@@ -52,7 +50,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     IsEmptyComponent,
     FilterUsersPipe,
-    NgSelectModule
+    NgSelectModule,
   ],
   providers: [
     TranslationService,

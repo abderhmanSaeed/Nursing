@@ -68,7 +68,28 @@
   "female":"female",
   "Gender": "Gender",
   "Address": "Address",
-  "Role": "Role"
+  "Role": "Role",
+  "Availability": "Availability",
+  "Email" : "Email",
+  "Services" : "Services",
+  "Shifts" : "Shifts",
+  "userName" : "User Name",
+  "Birthday" : "Birthday",
+  "nationalID" : "National ID",
+  "fullName" : "Full Name",
+  "search" : "Search",
+  "attachPhoto" : "Attach Photo",
+  "systemUsers" : "System Users",
+  "allowedFilestypes" : "Allowed files types: ",
+  "Sun" : "Sun",
+  "Mon" : "Mon",
+  "Tue" : "Tue",
+  "Wed" : "Wed",
+  "Thu" : "Thu",
+  "Fri" : "Fri",
+  "Sat" : "Sat",
+  "moreThan" : "More than 400+ new members"
+
 
 
 

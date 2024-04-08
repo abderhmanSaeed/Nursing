@@ -16,4 +16,8 @@ export class UserService {
 
     return this.httpService.get<ApiResponse<UsersResponse>>(url);
   }
+
+  addUser(user: any) {
+    return this.httpService.post(APIs.addUser, user);
+  }
 }
