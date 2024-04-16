@@ -6,9 +6,10 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
   styleUrl: './auth-layout.component.scss'
 })
 export class AuthLayoutComponent implements OnInit {
-  constructor() { }
+  constructor() { }  
   ngOnInit(): void {
     // document.body.style.background = "url('../../../assets/images/auth-bg.jpg') no-repeat center/cover";
+    if(document)
       document?.body?.classList.add('auth-pages');
   }
 

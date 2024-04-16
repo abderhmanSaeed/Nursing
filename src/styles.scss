@@ -345,6 +345,7 @@ input:-webkit-autofill:active {
     h3 {
       font-size: 18px;
       color: $dark_cyan;
+      margin-bottom: 0;
     }
 
     &.orange {
@@ -376,7 +377,7 @@ input:-webkit-autofill:active {
 .cards {
   .item {
     background: $white url('../src/assets/images/card-bg.svg') no-repeat right/cover;
-    padding: 50px;
+    padding: 30px;
     display: flex;
     border-radius: 25px;
     align-items: center;
@@ -393,8 +394,8 @@ input:-webkit-autofill:active {
 
     .icon {
       margin-inline-end: 50px;
-      height: 75px;
-      width: 75px;
+      height: 65px;
+      width: 65px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -416,6 +417,7 @@ input:-webkit-autofill:active {
 
     h4 {
       color: $dark_cyan;
+      font-size: 22px;
 
       @media (max-width:1024px) {
         font-size: 18px;
