@@ -1,14 +1,16 @@
 export interface Requests {
-  id: string;
-  patientId: string;
-  serviceIds: string[];
-  services: string[];
-  tenantId: string;
-  assignedUserIds: string[];
-  assignedUsers: string[];
-  requestNumber: string;
-  statusId: number;
-  visitTimeFrom: {
+  Id: string;
+  PatientName: string;
+  PatientId: string;
+  PatientPhone:string;
+  ServiceIds: string[];
+  Services: string[];
+  TenantId: string;
+  AssignedUserIds: string[];
+  AssignedUsers: string[];
+  RequestNumber: string;
+  StatusId: number;
+  VisitTimeFrom: {
     ticks: number;
     days: number;
     hours: number;
@@ -21,7 +23,7 @@ export interface Requests {
     totalMinutes: number;
     totalSeconds: number;
   };
-  visitTimeTo: {
+  VisitTimeTo: {
     ticks: number;
     days: number;
     hours: number;
@@ -34,14 +36,13 @@ export interface Requests {
     totalMinutes: number;
     totalSeconds: number;
   };
-  visitDate: string;
-  gender: number;
-  location: string;
-  lat: number;
-  long: number;
-  notes: string;
+  VisitDate: string;
+  Gender: number;
+  Location: string;
+  Lat: number;
+  Long: number;
+  Notes: string;
 }
-
 
 // Optionally, if you want to specifically type the 'Data' field for the GetAllUsers response:
 export type RequestResponse = Requests[];
