@@ -7,9 +7,6 @@ export class APIs {
 
     // Auth APIs
     public static login = '/Account/SignIn';
-
-
-
     // users APIs
     public static getAllUsers = '/Users'; // Ensure this line is added
     public static addUser = '/Users'; // Ensure this line is added
