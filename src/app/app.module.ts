@@ -31,7 +31,6 @@ import { SideBarComponent } from './layout/sidebar/sidebar.component';
     CommonModule,
     SharedModule,
     HttpClientModule,
-    BrowserModule,
     AppRoutingModule,
     NgbModule,
     TranslateModule.forRoot({

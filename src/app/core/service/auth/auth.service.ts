@@ -61,7 +61,6 @@ export class AuthService {
 
   getToken(): string | null {
     try {
-      debugger
       const tokenLocalStorage = localStorage?.getItem('token');
       return tokenLocalStorage || null;
     } catch (error) {debugger

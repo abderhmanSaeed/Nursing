@@ -2,43 +2,66 @@
   <!-- user-list.component.html -->
   <div class="card border-0 p-3 rounded-4 mb-3">
     <div class="card-body">
+      <div *ngIf="showCopiedMessage" class="copied-message">{{"linkCopied" | translate}}</div>
+
       <div class="accordion accordion-style-1" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Search
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              {{"search" | translate}}
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <form action="">
                 <div class="container-fluid p-0">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
+                        <app-input-filed [label]="'usernameOrMobile' | translate"
+                          [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
+                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                          (nameChanged)="handleInputChange($event)">
                         </app-input-filed>
+                        <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
+                          bindLabel="name" bindValue="id">
+                          <ng-option [value]="">selectRole</ng-option>
+                          <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
+                        </ng-select> -->
+                        <ng-select id="selectedRoleId" [(ngModel)]="selectedRoleId" [placeholder]= '("selectRole" | translate)'
+                          (change)="onSellerSelected($event)"  [searchable]="true">)
+                          <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
+                        </ng-select>
+
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate" [placeholder]="'usernameOrMobile' | translate"
-                          [name]="'usernameOrMobile'" [type]="'text'"
+                        <!-- <app-input-filed [label]="'usernameOrMobile' | translate"
+                          [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
-                        </app-input-filed>
+                        </app-input-filed> -->
+
+                        <div class="filter-section">
+                          <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+                            <option value="" translate="selectRole"></option>
+                            <option value="1" translate="admin"></option>
+                            <option value="2" translate="employee"></option>
+
+                          </select> -->
+
+
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="d-flex justify-content-end">
-                      <button type="button" class="btn btn-primary">Search</button>
+                      <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
                     </div>
                   </div>
                 </div>
 
-              </form>
             </div>
           </div>
         </div>
@@ -49,27 +72,80 @@
     <div class="card-body">
       <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
         <div>
-          <h5 class="card-title">System Users</h5>
-          <p class="card-subtitle">More than 400+ new members</p>
+          <h5 class="card-title">{{"systemUsers" | translate}}</h5>
+          <p class="card-subtitle">{{"moreThan" | translate}}</p>
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addUser" | translate}}</button>
+        <!-- {{Roles | json}} -->
+        <!-- {{Services | json}}
+        {{Shifts | json}} -->
       </div>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Full Name</th>
+              <!-- <th scope="col">Full Name</th>
               <th scope="col">Phone</th>
               <th scope="col">Role</th>
               <th scope="col">Gender</th>
               <th scope="col">Address</th>
               <th scope="col">Avaiablility</th>
-              <th scope="col">Action</th>
+              <th scope="col">Action</th> -->
+
+              <th scope="col">{{ 'number' | translate }}</th>
+              <th scope="col">{{ 'name' | translate }}</th>
+              <th scope="col">{{ 'email' | translate }}</th>
+              <th scope="col">{{ 'Role' | translate }}</th>
+              <th scope="col">{{ 'phone' | translate }}</th>
+              <th scope="col">{{ 'Gender' | translate }}</th>
+              <th scope="col">{{ 'Address' | translate }}</th>
+              <th scope="col">{{ 'Availability' | translate }}</th>
+              <th scope="col">{{ 'actions' | translate }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+
+            <tr *ngFor="let user of filteredUsers; let i = index">
+              <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
+              <td>{{ user?.FullName }}</td>
+              <td>{{ user?.Email }}</td>
+              <td>
+                <span *ngIf="user?.Roles && user.Roles.length > 0">
+                  <span *ngFor="let role of user.Roles; let last = last">
+                    {{ role }}
+                    <span *ngIf="!last">, </span>
+                  </span>
+                </span>
+              </td>
+
+              <td>{{ user.Phones[0] }}</td>
+              <td>{{ user.IsMale ? ('male' | translate) : ('female' | translate) }}</td>
+              <td>{{ user?.UserLocation }}</td>
+                <td>
+                  <ul  class="dayes">
+                    <li  *ngFor="let day of user.WorksingDays" >{{ getNameOfDays(day) }}</li>
+                  </ul>
+                </td>
+              <td>
+                <ul class="action">
+                  <!-- <li >
+                    <a  (click)="copyUser(user)">
+                      <i class="fa-regular fa-copy cursor-pointer-on-hover"></i>
+                    </a>
+                  </li> -->
+
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+
+            <!-- <tr>
               <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
               <td>01125035096</td>
               <td>Super Admin-
@@ -157,7 +233,7 @@
                   </li>
                 </ul>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -204,6 +280,10 @@
           </div>
           <div class="filter-section">
             <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+              <option value="" translate="selectRole"></option>
+              <option value="1" translate="admin"></option>
+              <option value="2" translate="employee"></option>
+
               <option value="" translate="selectRole"></option>
               <option value="1" translate="admin"></option>
               <option value="2" translate="employee"></option>
@@ -274,122 +354,133 @@
     </div>
     <div class="modal-body">
 
-      <form>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Full Name</label>
-                <input type="text" class="form-control" id="userName">
-              </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="userName" class="d-block w-100 mb-2">{{ 'fullName' | translate }}</label>
+              <input type="text" class="form-control" id="userName" [(ngModel)]="fullName">
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Phone (1)</label>
-                <input type="text" class="form-control" id="userName">
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="nationalId" class="d-block w-100 mb-2">{{ 'nationalID' | translate }} </label>
+              <input type="text" class="form-control" id="nationalId" [(ngModel)]="nationalId">
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Phone (2)</label>
-                <input type="text" class="form-control" id="userName">
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="phone1" class="d-block w-100 mb-2">{{ 'phone' | translate }} </label>
+              <input type="text" class="form-control" id="phone1" [(ngModel)]="phone1">
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Role</label>
-                <ng-select [items]="options" [searchable]="false" [(ngModel)]="selectedOptions"
-                  (change)="onSelectionChange()">
-                </ng-select>
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="phone2" class="d-block w-100 mb-2">{{ 'phone' | translate }} (2)</label>
+              <input type="text" class="form-control" id="phone2" [(ngModel)]="phone2">
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Gender</label>
-                <ng-select [items]="options" [searchable]="false" [(ngModel)]="selectedOptions"
-                  (change)="onSelectionChange()">
-                </ng-select>
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="role" class="d-block w-100 mb-2">{{ 'Role' | translate }}</label>
+              <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedRole"
+                (change)="onSelectionRolesChange()">
+              </ng-select>
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Address</label>
-                <input type="text" class="form-control" id="userName">
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="gender" class="d-block w-100 mb-2">{{ 'Gender' | translate }}</label>
+              <ng-select [items]="genders" [searchable]="false" [(ngModel)]="selectedGender"
+                (change)="onSelectionGenderChange()">
+              </ng-select>
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Password</label>
-                <input type="text" class="form-control" id="userName">
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="birthday" class="d-block w-100 mb-2">{{ 'Birthday' | translate }}</label>
+              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="birthday">
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Services</label>
-                <ng-select [items]="options" [multiple]="true" [searchable]="true" [(ngModel)]="selectedOptions"
-                  (change)="onSelectionChange()">
-                </ng-select>
-              </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
+              <input type="text" class="form-control" id="address" [(ngModel)]="address">
             </div>
-            <div class="col-lg-12">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Avaiablility</label>
-                <div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Sun" value="Sun">
-                    <label class="form-check-label" for="day_Sun">Sun</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Mun" value="Mun">
-                    <label class="form-check-label" for="day_Mun">Mun</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Tue" value="Tue">
-                    <label class="form-check-label" for="day_Tue">Tue</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Wed" value="Wed">
-                    <label class="form-check-label" for="day_Wed">Wed</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Thu" value="Thu">
-                    <label class="form-check-label" for="day_Thu">Thu</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Fri" value="Fri">
-                    <label class="form-check-label" for="day_Fri">Fri</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="day_Sat" value="Sat">
-                    <label class="form-check-label" for="day_Sat">Sat</label>
-                  </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="userName" class="d-block w-100 mb-2">{{ 'userName' | translate }}</label>
+              <input type="text" class="form-control" id="userName" [(ngModel)]="userName">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="email" class="d-block w-100 mb-2">{{ 'Email' | translate }}</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="email">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="password" class="d-block w-100 mb-2">{{ 'Password' | translate }}</label>
+              <input type="password" class="form-control" id="password" [(ngModel)]="password">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
+                (change)="onSelectionServicesChange()">
+              </ng-select>
+            </div>
+
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="shifts" class="d-block w-100 mb-2">{{ 'Shifts' | translate }}</label>
+              <ng-select [items]="Shifts" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedShifts"
+                (change)="onSelectionShiftsChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="mb-3">
+              <label for="availability" class="d-block w-100 mb-2">{{ 'Availability' | translate }}</label>
+              <div>
+                <div *ngFor="let day of daysArray" class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" [id]="'day_' + day[0]" [value]="day[0]" [(ngModel)]="days[day[0]]">
+                  <label class="form-check-label" [for]="'day_' + day[0]">{{ getNameOfDays(day[1]) }}</label>
                 </div>
+                <!-- Add other checkboxes for each day -->
               </div>
             </div>
-            <div class="col-lg-12">
-              <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">
-                  Attach Photo
-                  <span class="d-block form-text mt-0 mb-3">Allowed files types: png, jpg, jpeg.</span>
+          </div>
+          <div class="col-lg-12">
+            <div class="mb-3">
+              <label for="photo" class="d-block w-100 mb-2">
+                {{"attachPhoto" | translate}}
+                <span class="d-block form-text mt-0 mb-3">{{"allowedFilestypes" | translate}} png, jpg, jpeg.</span>
+              </label>
+              <div class="upload-user-img-wrapper">
+                <img src="../../../../../assets/images/avatar.svg" class="img-fluid" alt="">
+                <label class="upload-user-img-trigger" for="upload_user_img_btn">
+                  <i class="fa-solid fa-pen"></i>
+                  <input id="upload_user_img_btn" class="upload-user-img-btn" type="file" name="userImg"
+                    accept=".png, .jpg, .jpeg" [(ngModel)]="photo">
                 </label>
-                <div class="upload-user-img-wrapper">
-                  <img src="../../../../../assets/images/avatar.svg" class="img-fluid" alt="">
-                  <label class="upload-user-img-trigger" for="upload_user_img_btn">
-                    <i class="fa-solid fa-pen"></i>
-                    <input id="upload_user_img_btn" class="upload-user-img-btn" type="file" name="userImg"
-                      accept=".png, .jpg, .jpeg" />
-                  </label>
-                </div>
               </div>
             </div>
           </div>
         </div>
-      </form>
+      </div>
+
+
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
         {{ 'close' | translate }}</button>
-      <button type="button" class="btn btn-primary">Add User</button>
+      <button type="button" class="btn btn-primary" (click)="addUser()">{{"addUser" | translate}}</button>
     </div>
   </ng-template>
   <!-- if the cart is empaty  -->

@@ -1,1 +1,15 @@
 
+.copied-message {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  // display: none; /* Initially hide the message */
+}
+
+.cursor-pointer-on-hover:hover {
+  cursor: pointer;
+}

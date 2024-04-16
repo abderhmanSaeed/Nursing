@@ -11,7 +11,13 @@ export class UserService {
 
   constructor(private httpService: HttpService) { }
 
-  getAllUsers(): Observable<ApiResponse<UsersResponse>> {
-    return this.httpService.get<ApiResponse<UsersResponse>>(APIs.getAllUsers);
+  getAllUsers(tenantId: string): Observable<ApiResponse<UsersResponse>> {
+    const url = `${APIs.getAllUsers}?tenantId=${tenantId}`;
+
+    return this.httpService.get<ApiResponse<UsersResponse>>(url);
+  }
+
+  addUser(user: any) {
+    return this.httpService.post(APIs.addUser, user);
   }
 }

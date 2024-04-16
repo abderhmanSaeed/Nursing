@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../../data/service/login/login.service';
 import { AuthService } from '../../../../core/service/auth/auth.service';
 import { Router } from '@angular/router';
@@ -11,13 +11,21 @@ import { CONFIG } from '../../../../shared/configs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   usernameOrMobile: string = '';
   password: string = '';
   constructor(private loginService: LoginService, private authService: AuthService,
     private router: Router,
-  ) { 
+  ) {
     this.updateMessage();
+  }
+  ngOnInit(): void {
+    // Get the authentication token from the AuthService
+    const token = this.authService.getToken();
+    if(token){
+
+    }
+
   }
 
 
@@ -44,7 +52,7 @@ export class LoginComponent {
           localStorage.setItem('user_info', JSON.stringify({
             NameAr: response.Data.NameAr,
             NameEn: response.Data.NameEn,
-            PhoneList: response.Data.PhoneList
+            PhoneList: response.Data.Phones
           }));
           // Handle successful login, e.g., navigate to the dashboard
           this.router.navigate([CONFIG.dashboard.name]); // Assuming you have routing set up
@@ -61,32 +69,32 @@ export class LoginComponent {
   }
 
 
-   // Using var
-   varVariable: string = 'Hello, var!';
-  
-   updateMessageVar() {
-     var varVariable = 'Updated var!';
-     this.message = varVariable;
-   }
- 
-   // Using let
-   letVariable: string = 'Hello, let!';
-   
-   updateMessageLet() {
-     let letVariable = 'Updated let!';
-     this.message = letVariable;
-   }
- 
-   // Using const
-   constVariable: string = 'Hello, const!';
-   
-   updateMessageConst() {
-     // constVariable = 'Updated const!'; // Error: Cannot assign to 'constVariable' because it is a constant.
-     this.message = this.constVariable;
-   }
-   message: string = this.varVariable;
+  // Using var
+  varVariable: string = 'Hello, var!';
 
-   updateMessage() {
+  updateMessageVar() {
+    var varVariable = 'Updated var!';
+    this.message = varVariable;
+  }
+
+  // Using let
+  letVariable: string = 'Hello, let!';
+
+  updateMessageLet() {
+    let letVariable = 'Updated let!';
+    this.message = letVariable;
+  }
+
+  // Using const
+  constVariable: string = 'Hello, const!';
+
+  updateMessageConst() {
+    // constVariable = 'Updated const!'; // Error: Cannot assign to 'constVariable' because it is a constant.
+    this.message = this.constVariable;
+  }
+  message: string = this.varVariable;
+
+  updateMessage() {
     console.log(this.message);
     this.updateMessageVar();
     // this.updateMessageLet();

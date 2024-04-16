@@ -25,7 +25,7 @@
   "contactUs": "Contact Us",
   "helpCenter": "Help Center",
   "faQ": "FAQ",
-  "linkCopied": "Link copied!",
+  "linkCopied": "User copied!",
   "login": "Login",
   "hello": "Hello!",
   "welcomeMsg": "Welcome back, Login to Continue",
@@ -63,5 +63,34 @@
   "close": "Close",
   "saveChanges": "Save changes",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "male":"Male",
+  "female":"female",
+  "Gender": "Gender",
+  "Address": "Address",
+  "Role": "Role",
+  "Availability": "Availability",
+  "Email" : "Email",
+  "Services" : "Services",
+  "Shifts" : "Shifts",
+  "userName" : "User Name",
+  "Birthday" : "Birthday",
+  "nationalID" : "National ID",
+  "fullName" : "Full Name",
+  "search" : "Search",
+  "attachPhoto" : "Attach Photo",
+  "systemUsers" : "System Users",
+  "allowedFilestypes" : "Allowed files types: ",
+  "Sun" : "Sun",
+  "Mon" : "Mon",
+  "Tue" : "Tue",
+  "Wed" : "Wed",
+  "Thu" : "Thu",
+  "Fri" : "Fri",
+  "Sat" : "Sat",
+  "moreThan" : "More than 400+ new members"
+
+
+
+
 }
