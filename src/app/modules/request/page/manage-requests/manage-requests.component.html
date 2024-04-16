@@ -1,0 +1,493 @@
+<main>
+  <!-- request-list.component.html -->
+  <div class="card border-0 p-3 rounded-4 mb-3">
+    <div class="card-body">
+      <div *ngIf="showCopiedMessage" class="copied-message">{{"linkCopied" | translate}}</div>
+
+      <div class="accordion accordion-style-1" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              {{"search" | translate}}
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="container-fluid p-0">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <app-input-filed [label]="'requestnameOrMobile' | translate"
+                          [placeholder]="'requestnameOrMobile' | translate" [name]="'requestnameOrMobile'" [type]="'text'"
+                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                          (nameChanged)="handleInputChange($event)">
+                        </app-input-filed>
+                        <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
+                          bindLabel="name" bindValue="id">
+                          <ng-option [value]="">selectRole</ng-option>
+                          <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
+                        </ng-select> -->
+                        <ng-select id="selectedRoleId" [(ngModel)]="selectedRoleId" [placeholder]= '("selectRole" | translate)'
+                          (change)="onSellerSelected($event)"  [searchable]="true">)
+                          <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
+                        </ng-select>
+
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <!-- <app-input-filed [label]="'requestnameOrMobile' | translate"
+                          [placeholder]="'requestnameOrMobile' | translate" [name]="'requestnameOrMobile'" [type]="'text'"
+                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
+                        </app-input-filed> -->
+
+                        <div class="filter-section">
+                          <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+                            <option value="" translate="selectRole"></option>
+                            <option value="1" translate="admin"></option>
+                            <option value="2" translate="employee"></option>
+
+                          </select> -->
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="d-flex justify-content-end">
+                      <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card border-0 p-3 rounded-4">
+    <div class="card-body">
+      <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h5 class="card-title">{{"systemRequests" | translate}}</h5>
+          <p class="card-subtitle">{{"moreThan" | translate}}</p>
+        </div>
+        <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
+          {{"addRequest" | translate}}</button>
+        <!-- {{Roles | json}} -->
+        <!-- {{Services | json}}
+        {{Shifts | json}} -->
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th scope="col">Full Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Role</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Address</th>
+              <th scope="col">Avaiablility</th>
+              <th scope="col">Action</th> -->
+
+              <th scope="col">{{ 'number' | translate }}</th>
+              <th scope="col">{{ 'name' | translate }}</th>
+              <th scope="col">{{ 'email' | translate }}</th>
+              <th scope="col">{{ 'Role' | translate }}</th>
+              <th scope="col">{{ 'phone' | translate }}</th>
+              <th scope="col">{{ 'Gender' | translate }}</th>
+              <th scope="col">{{ 'Address' | translate }}</th>
+              <th scope="col">{{ 'Availability' | translate }}</th>
+              <th scope="col">{{ 'actions' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let request of filteredRequests; let i = index">
+              <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
+              <td>{{ request?.FullName }}</td>
+              <td>{{ request?.Email }}</td>
+              <td>
+                <span *ngIf="request?.Roles && request.Roles.length > 0">
+                  <span *ngFor="let role of request.Roles; let last = last">
+                    {{ role }}
+                    <span *ngIf="!last">, </span>
+                  </span>
+                </span>
+              </td>
+
+              <td>{{ request.Phones[0] }}</td>
+              <td>{{ request.IsMale ? ('male' | translate) : ('female' | translate) }}</td>
+              <td>{{ request?.RequestLocation }}</td>
+                <td>
+                  <ul  class="dayes">
+                    <li  *ngFor="let day of request.WorksingDays" >{{ getNameOfDays(day) }}</li>
+                  </ul>
+                </td>
+              <td>
+                <ul class="action">
+                  <!-- <li >
+                    <a  (click)="copyRequest(request)">
+                      <i class="fa-regular fa-copy cursor-pointer-on-hover"></i>
+                    </a>
+                  </li> -->
+
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+
+            <!-- <tr>
+              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
+              <td>01125035096</td>
+              <td>Super Admin-
+                Employee</td>
+              <td>Male</td>
+              <td>54 - Madinaty -
+                First Settlement</td>
+              <td>
+                <ul class="dayes">
+                  <li>Sun</li>
+                  <li>Mon</li>
+                  <li>Tue</li>
+                  <li>Thu</li>
+                  <li>Fri</li>
+                  <li>Sat</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="action">
+                  <li>
+                    <a href="#"><i class="fa-regular fa-copy"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
+              <td>01125035096</td>
+              <td>Super Admin-
+                Employee</td>
+              <td>Male</td>
+              <td>54 - Madinaty -
+                First Settlement</td>
+              <td>
+                <ul class="dayes">
+                  <li>Sun</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="action">
+                  <li>
+                    <a href="#"><i class="fa-regular fa-copy"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><a href="#" class="fw-bold">Ahmed Abdel Aziz</a></td>
+              <td>01125035096</td>
+              <td>Super Admin-
+                Employee</td>
+              <td>Male</td>
+              <td>54 - Madinaty -
+                First Settlement</td>
+              <td>
+                <ul class="dayes">
+                  <li>Sun</li>
+                  <li>Mon</li>
+                  <li>Tue</li>
+                  <li>Thu</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="action">
+                  <li>
+                    <a href="#"><i class="fa-regular fa-copy"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination-wrapper">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-sm">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="First">
+                <i class="fa-solid fa-angles-left"></i>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <i class="fa-solid fa-chevron-left"></i>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Last">
+                <i class="fa-solid fa-angles-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- <header class="masthead"> -->
+  <!-- <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+    <div class="d-flex justify-content-center">
+      <div class="text-center">
+        <div class="container mt-4">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Search by phone or requestname..."
+              [(ngModel)]="searchTerm">
+          </div>
+          <div class="filter-section">
+            <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+              <option value="" translate="selectRole"></option>
+              <option value="1" translate="admin"></option>
+              <option value="2" translate="employee"></option>
+
+              <option value="" translate="selectRole"></option>
+              <option value="1" translate="admin"></option>
+              <option value="2" translate="employee"></option>
+
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" (click)="openModal()">
+              {{"addRequest" | translate}}
+            </button>
+          </div>
+          <div class="text-center mb-2">
+            {{"request" | translate}} {{ (currentPage-1) * itemsPerPage + 1 }} {{"of" | translate}} {{ requests.length }}
+          </div> -->
+
+  <!-- Existing table -->
+  <!-- <table class="table" *ngIf="filteredRequests.length > 0; else isEmpty">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'number' | translate }}</th>
+                <th scope="col">{{ 'name' | translate }}</th>
+                <th scope="col">{{ 'email' | translate }}</th>
+                <th scope="col">{{ 'phone' | translate }}</th>
+                <th scope="col">{{ 'actions' | translate }}</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let request of filteredRequests; let i = index">
+                <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
+                <td>{{ getCurrentName(request) }}</td>
+                <td>{{ request.Email }}</td>
+                <td>{{ request.PhoneList[0] }}</td>
+                <td> -->
+  <!-- Actions like Edit or Delete -->
+  <!-- <button class="btn btn-primary btn-sm">{{ 'edit' | translate }}</button>
+                  <button class="btn btn-danger btn-sm">{{ 'delete' | translate }}</button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Pagination Controls -->
+  <!-- <nav *ngIf="requests.length > 1">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" href="#" (click)="previousPage(); $event.preventDefault()">{{"previous" | translate}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === requests.length">
+        <a class="page-link" href="#" (click)="nextPage(); $event.preventDefault()">{{"next" | translate}}</a>
+      </li>
+    </ul>
+  </nav> -->
+
+  <!-- Modal -->
+  <ng-template #addRequestModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">{{"addRequest" | translate}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="requestName" class="d-block w-100 mb-2">{{ 'fullName' | translate }}</label>
+              <input type="text" class="form-control" id="requestName" [(ngModel)]="fullName">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="nationalId" class="d-block w-100 mb-2">{{ 'nationalID' | translate }} </label>
+              <input type="text" class="form-control" id="nationalId" [(ngModel)]="nationalId">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="phone1" class="d-block w-100 mb-2">{{ 'phone' | translate }} </label>
+              <input type="text" class="form-control" id="phone1" [(ngModel)]="phone1">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="phone2" class="d-block w-100 mb-2">{{ 'phone' | translate }} (2)</label>
+              <input type="text" class="form-control" id="phone2" [(ngModel)]="phone2">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="role" class="d-block w-100 mb-2">{{ 'Role' | translate }}</label>
+              <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedRole"
+                (change)="onSelectionRolesChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="gender" class="d-block w-100 mb-2">{{ 'Gender' | translate }}</label>
+              <ng-select [items]="genders" [searchable]="false" [(ngModel)]="selectedGender"
+                (change)="onSelectionGenderChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="birthday" class="d-block w-100 mb-2">{{ 'Birthday' | translate }}</label>
+              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="birthday">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
+              <input type="text" class="form-control" id="address" [(ngModel)]="address">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="requestName" class="d-block w-100 mb-2">{{ 'requestName' | translate }}</label>
+              <input type="text" class="form-control" id="requestName" [(ngModel)]="requestName">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="email" class="d-block w-100 mb-2">{{ 'Email' | translate }}</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="email">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="password" class="d-block w-100 mb-2">{{ 'Password' | translate }}</label>
+              <input type="password" class="form-control" id="password" [(ngModel)]="password">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
+                (change)="onSelectionServicesChange()">
+              </ng-select>
+            </div>
+
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="shifts" class="d-block w-100 mb-2">{{ 'Shifts' | translate }}</label>
+              <ng-select [items]="Shifts" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedShifts"
+                (change)="onSelectionShiftsChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="mb-3">
+              <label for="availability" class="d-block w-100 mb-2">{{ 'Availability' | translate }}</label>
+              <div>
+                <div *ngFor="let day of daysArray" class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" [id]="'day_' + day[0]" [value]="day[0]" [(ngModel)]="days[day[0]]">
+                  <label class="form-check-label" [for]="'day_' + day[0]">{{ getNameOfDays(day[1]) }}</label>
+                </div>
+                <!-- Add other checkboxes for each day -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="mb-3">
+              <label for="photo" class="d-block w-100 mb-2">
+                {{"attachPhoto" | translate}}
+                <span class="d-block form-text mt-0 mb-3">{{"allowedFilestypes" | translate}} png, jpg, jpeg.</span>
+              </label>
+              <div class="upload-request-img-wrapper">
+                <img src="../../../../../assets/images/avatar.svg" class="img-fluid" alt="">
+                <label class="upload-request-img-trigger" for="upload_request_img_btn">
+                  <i class="fa-solid fa-pen"></i>
+                  <input id="upload_request_img_btn" class="upload-request-img-btn" type="file" name="requestImg"
+                    accept=".png, .jpg, .jpeg" [(ngModel)]="photo">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+        {{ 'close' | translate }}</button>
+      <button type="button" class="btn btn-primary" (click)="addRequest()">{{"addRequest" | translate}}</button>
+    </div>
+  </ng-template>
+  <!-- if the cart is empaty  -->
+  <ng-template #isEmpty>
+    <app-is-empty class="d-block" style="margin-right: 8rem;"></app-is-empty>
+  </ng-template>
+
+  <!-- </header> -->
+
+</main>

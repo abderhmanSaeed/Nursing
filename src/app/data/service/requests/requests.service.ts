@@ -10,9 +10,13 @@ export class RequestsService {
 
   constructor(private httpService: HttpService) { }
 
+  getMyRequests(tenantId: string): Observable<ApiResponse<RequestResponse>> {
+    const url = `${APIs.getAllRequests}?tenantId=${tenantId}&pageNumber=${1}&pazeSize=${10}`;
+    return this.httpService.get<ApiResponse<RequestResponse>>(url);
+  }
+  
   getAllRequests(tenantId: string): Observable<ApiResponse<RequestResponse>> {
     const url = `${APIs.getAllRequests}?tenantId=${tenantId}&pageNumber=${1}&pazeSize=${10}`;
     return this.httpService.get<ApiResponse<RequestResponse>>(url);
   }
-
 }
