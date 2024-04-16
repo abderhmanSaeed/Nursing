@@ -21,9 +21,6 @@
   "buyNow": "اشتري الآن",
   "additionalInfo": "معلومات أخرى",
   "Days": "أيام",
-  "buyNow": "اشتري الآن",
-  "additionalInfo": "معلومات أخرى",
-  "Days": "أيام",
   "copyright": "جميع الحقوق محفوظة لشركة التمريض.",
   "needHelp": "تحتاج مساعدة",
   "contactUs": "اتصل بنا",
@@ -49,6 +46,7 @@
   "guest": "زائر",
   "signUp": "اشتراك",
   "usernameOrMobile": "اسم المستخدم أو رقم الهاتف",
+  "patientNameOrMobile": "اسم المريض أو رقم الهاتف",
   "userEmpty": "لا يوجد لديك مستخدمين",
   "number": "#",
   "name": "الاسم",
@@ -93,7 +91,16 @@
   "Thu" : "الخميس",
   "Fri" : "الجمعة",
   "Sat" : "السبت",
-  "moreThan" : "أكثر من 400+ عضو جديد"
+  "moreThan" : "أكثر من 400+ عضو جديد",
+  "patientName": "اسم المريض",
+  "services": "الخدمات",
+  "assignedUserIds": "معرفات المستخدمين المعينة",
+  "assignedUsers": "المستخدمون المعينون",
+  "requestNumber": "رقم الطلب",
+  "visitDate": "تاريخ الزيارة",
+  "location": "الموقع",
+  "notes": "ملاحظات",
+  "patientPhone": "هاتف المريض"
 
 
 

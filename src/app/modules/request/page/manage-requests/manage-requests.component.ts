@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ApiResponse, Lookup } from '../../../../shared/models';
+import { ApiResponse, Lookup, Requests } from '../../../../shared/models';
 import { AuthService } from '../../../../core/service/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LookupsService } from '../../../../data/service/lookups.service';
@@ -16,8 +16,8 @@ import { RequestsService } from '../../../../data/service/requests/requests.serv
 export class ManageRequestsComponent implements OnInit {
 
   @ViewChild('addRequestModal') addRequestModal: TemplateRef<any> | undefined;
+  requests: Requests[] = [];
 
-  requests: Request[] = [];
   searchTerm: string = '';
   selectedNurseId: any;  // Variable to hold the selected role ID
   currentPage = 1;
@@ -35,6 +35,7 @@ export class ManageRequestsComponent implements OnInit {
   Shifts: Lookup[] = [];
   Days = Days;
   daysArray: [string, number][]; // Declare daysArray here
+  selectedRoleId: string = ''; // Variable to hold the selected role ID
 
   maxStartDate: string;
   requestForm!: FormGroup; // Using definite assignment assertion
@@ -69,7 +70,7 @@ export class ManageRequestsComponent implements OnInit {
     photo: ''
   };
 
-  constructor(private requestService: RequestsService, private authService: AuthService, private modalService: NgbModal,
+  constructor(private requestsService: RequestsService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder) {
     // Initialize maxStartDate with today's date
     const today = new Date();
@@ -151,7 +152,7 @@ export class ManageRequestsComponent implements OnInit {
           default:
             return null; // Handle unknown days if needed
         }
-      }).filter(Boolean),      currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
+      }).filter(Boolean), currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
       currentLong: 4.469936, // Assuming currentLat and currentLong are not available from console logs
     };
 
@@ -174,8 +175,8 @@ export class ManageRequestsComponent implements OnInit {
 
 
   getAllRequests() {
-    this.requestService.getAllRequests(this.tenantId).subscribe({
-      next: (response: ApiResponse<Request[]>) => {
+    this.requestsService.getAllRequests(this.tenantId).subscribe({
+      next: (response: ApiResponse<Requests[]>) => {
         if (response.Success && response.Data) {
           this.requests = response.Data;
         } else {
@@ -187,36 +188,47 @@ export class ManageRequestsComponent implements OnInit {
       }
     });
   }
-  
+
 
   handleInputChange(value: string) {
     // Here you can access the emitted value and perform actions
     this.searchTerm = value;
   }
 
- 
-
-  
 
 
 
-  getCurrentName(request: Request): string {
-    const currentLang = this.authService.getCurrentLanguage();
-    return currentLang === 'ar' ? request.NameAr : request.NameEn;
-  }
+
+
+
+  // getCurrentName(request: Request): string {
+  //   const currentLang = this.authService.getCurrentLanguage();
+  //   return currentLang === 'ar' ? request.NameAr : request.NameEn;
+  // }
 
   openModal() {
 
     this.modalService.open(this.addRequestModal, { size: 'lg' });
   }
 
-  
+
 
   nextPage() {
     const totalItems = this.filteredRequests.length;
     // if (this.currentPage <= totalItems) { // Simplified condition
     // }
     this.currentPage++;
+  }
+  get filteredRequests() {
+    if (!this.searchTerm && !this.selectedRoleId) {
+      return this.requests;
+    } else {
+      return this.requests.filter(request =>
+      (!this.searchTerm || // If no search term or search term matches
+        (request.PatientName && request.PatientName.toLowerCase().includes(this.searchTerm.toLowerCase())) || // Filter by FullName
+        (request.PatientPhone && request.PatientPhone.toLowerCase().includes(this.searchTerm.toLowerCase()))
+      ));
+    }
   }
 
   onSelectionGenderChange(): void {

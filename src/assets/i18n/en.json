@@ -44,6 +44,7 @@
   "confirm": "Confirm",
   "guest": "Guest",
   "usernameOrMobile": "Username or Mobile",
+  "patientNameOrMobile": "patient Name Or Mobile",
   "userEmpty": "Your users is empty",
   "number": "#",
   "name": "Name",
@@ -88,7 +89,16 @@
   "Thu" : "Thu",
   "Fri" : "Fri",
   "Sat" : "Sat",
-  "moreThan" : "More than 400+ new members"
+  "moreThan" : "More than 400+ new members",
+  "patientName": "Patient Name",
+  "services": "Services",
+  "assignedUserIds": "Assigned User IDs",
+  "assignedUsers": "Assigned Users",
+  "requestNumber": "Request Number",
+  "visitDate": "Visit Date",
+  "location": "Location",
+  "notes": "Notes",
+  "patientPhone": "Patient Phone"
 
 
 

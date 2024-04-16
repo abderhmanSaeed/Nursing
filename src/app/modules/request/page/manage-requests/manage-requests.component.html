@@ -18,8 +18,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <app-input-filed [label]="'requestnameOrMobile' | translate"
-                          [placeholder]="'requestnameOrMobile' | translate" [name]="'requestnameOrMobile'" [type]="'text'"
+                        <app-input-filed [label]="'patientNameOrMobile' | translate"
+                          [placeholder]="'patientNameOrMobile' | translate" [name]="'patientNameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
                           (nameChanged)="handleInputChange($event)">
                         </app-input-filed>
@@ -28,17 +28,14 @@
                           <ng-option [value]="">selectRole</ng-option>
                           <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
                         </ng-select> -->
-                        <ng-select id="selectedRoleId" [(ngModel)]="selectedRoleId" [placeholder]= '("selectRole" | translate)'
-                          (change)="onSellerSelected($event)"  [searchable]="true">)
-                          <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
-                        </ng-select>
+
 
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <!-- <app-input-filed [label]="'requestnameOrMobile' | translate"
-                          [placeholder]="'requestnameOrMobile' | translate" [name]="'requestnameOrMobile'" [type]="'text'"
+                        <!-- <app-input-filed [label]="'patientNameOrMobile' | translate"
+                          [placeholder]="'patientNameOrMobile' | translate" [name]="'patientNameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
                         </app-input-filed> -->
 
@@ -77,7 +74,8 @@
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addRequest" | translate}}</button>
-        <!-- {{Roles | json}} -->
+        <!-- {{requests | json}} -->
+        <!-- {{filteredRequests | json}} -->
         <!-- {{Services | json}}
         {{Shifts | json}} -->
       </div>
@@ -92,15 +90,16 @@
               <th scope="col">Address</th>
               <th scope="col">Avaiablility</th>
               <th scope="col">Action</th> -->
-
               <th scope="col">{{ 'number' | translate }}</th>
-              <th scope="col">{{ 'name' | translate }}</th>
-              <th scope="col">{{ 'email' | translate }}</th>
-              <th scope="col">{{ 'Role' | translate }}</th>
-              <th scope="col">{{ 'phone' | translate }}</th>
+              <th scope="col">{{ 'patientName' | translate }}</th>
+              <th scope="col">{{ 'patientPhone' | translate }}</th>
+              <th scope="col">{{ 'services' | translate }}</th>
+              <th scope="col">{{ 'assignedUsers' | translate }}</th>
+              <th scope="col">{{ 'requestNumber' | translate }}</th>
               <th scope="col">{{ 'Gender' | translate }}</th>
-              <th scope="col">{{ 'Address' | translate }}</th>
-              <th scope="col">{{ 'Availability' | translate }}</th>
+              <th scope="col">{{ 'visitDate' | translate }}</th>
+              <th scope="col">{{ 'location' | translate }}</th>
+              <th scope="col">{{ 'notes' | translate }}</th>
               <th scope="col">{{ 'actions' | translate }}</th>
             </tr>
           </thead>
@@ -108,25 +107,36 @@
 
             <tr *ngFor="let request of filteredRequests; let i = index">
               <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
-              <td>{{ request?.FullName }}</td>
-              <td>{{ request?.Email }}</td>
+              <td>{{ request?.PatientName }}</td>
+              <td>{{ request?.PatientPhone }}</td>
               <td>
-                <span *ngIf="request?.Roles && request.Roles.length > 0">
-                  <span *ngFor="let role of request.Roles; let last = last">
-                    {{ role }}
+                <span *ngIf="request?.Services && request.Services.length > 0">
+                  <span *ngFor="let Service of request.Services; let last = last">
+                    {{ Service }}
                     <span *ngIf="!last">, </span>
                   </span>
                 </span>
               </td>
+              <td>
+                <span *ngIf="request?.AssignedUsers && request.AssignedUsers.length > 0">
+                  <span *ngFor="let User of request.AssignedUsers; let last = last">
+                    {{ User }}
+                    <span *ngIf="!last">, </span>
+                  </span>
+                </span>
+              </td>
+              <!-- <td>
+                <ul  class="dayes">
+                  <li  *ngFor="let User of request.AssignedUsers" >{{ User }}</li>
+                </ul>
+              </td> -->
+              <td>{{ request?.RequestNumber }}</td>
+              <td>{{ request.Gender === 1 ? ('male' | translate) : ('female' | translate) }}</td>
+              <td>{{ request?.VisitDate | date }}</td>
+              <td>{{ request?.Location }}</td>
+              <td>{{ request?.Notes }}</td>
 
-              <td>{{ request.Phones[0] }}</td>
-              <td>{{ request.IsMale ? ('male' | translate) : ('female' | translate) }}</td>
-              <td>{{ request?.RequestLocation }}</td>
-                <td>
-                  <ul  class="dayes">
-                    <li  *ngFor="let day of request.WorksingDays" >{{ getNameOfDays(day) }}</li>
-                  </ul>
-                </td>
+
               <td>
                 <ul class="action">
                   <!-- <li >
