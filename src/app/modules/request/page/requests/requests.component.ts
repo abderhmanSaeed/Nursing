@@ -2,7 +2,8 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../../../core/service/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RequestsService } from '../../../../data/service/requests/requests.service';
-import { ApiResponse, Requests } from '../../../../shared/models';
+import { ApiResponse, Lookup, Requests } from '../../../../shared/models';
+import { LookupsService } from '../../../../data/service/lookups.service';
 declare var bootstrap: any; // Declare bootstrap to use Bootstrap's JS
 
 @Component({
@@ -23,15 +24,17 @@ export class RequestsComponent implements OnInit {
 
   options = ['Option 1', 'Option 2', 'Option 3'];
   selectedOptions: string[] = [];
-
+  Patients: Lookup[] = [];
 
 
   constructor( private authService: AuthService, private modalService: NgbModal,
-    private requestsService :RequestsService
+    private requestsService :RequestsService,
+    private lookupsService: LookupsService,
   ) { }
 
   ngOnInit() {
     this.getAllRequests();
+
   }
 
   getAllRequests() {
@@ -48,5 +51,7 @@ export class RequestsComponent implements OnInit {
       }
     });
   }
+
+
 
 }

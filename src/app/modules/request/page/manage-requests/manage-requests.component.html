@@ -146,8 +146,9 @@
                   </li> -->
 
                   <li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                  </li>
+                    <a (click)="openEditModal(request)">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </a>                  </li>
                   <li>
                     <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                   </li>
@@ -251,26 +252,18 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination pagination-sm">
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="First">
-                <i class="fa-solid fa-angles-left"></i>
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+              <a class="page-link" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
                 <i class="fa-solid fa-chevron-left"></i>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <i class="fa-solid fa-chevron-right"></i>
+            <li class="page-item" [ngClass]="{'active': page === currentPage, 'cursor-pointer-on-hover': true}" *ngFor="let page of [1, 2, 3]"> <!-- Assuming you have a fixed number of pages -->
+              <a class="page-link"  (click)="onPageChange(page)">
+                {{ page }}
               </a>
             </li>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Last">
-                <i class="fa-solid fa-angles-right"></i>
+              <a class="page-link" aria-label="Next" (click)="onPageChange(currentPage + 1)">
+                <i class="fa-solid fa-chevron-right"></i>
               </a>
             </li>
           </ul>
@@ -355,7 +348,7 @@
     </ul>
   </nav> -->
 
-  <!-- Modal -->
+  <!-- Add Modal -->
   <ng-template #addRequestModal let-modal>
     <div class="modal-header">
       <h5 class="modal-title">{{"addRequest" | translate}}</h5>
@@ -368,33 +361,17 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="requestName" class="d-block w-100 mb-2">{{ 'fullName' | translate }}</label>
-              <input type="text" class="form-control" id="requestName" [(ngModel)]="fullName">
+              <label for="role" class="d-block w-100 mb-2">{{ 'Patient' | translate }}</label>
+              <ng-select [items]="Patients" [searchable]="true" bindLabel="Name" [(ngModel)]="selectedPatients"
+                (change)="onSelectionPatientsChange()">
+              </ng-select>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="nationalId" class="d-block w-100 mb-2">{{ 'nationalID' | translate }} </label>
-              <input type="text" class="form-control" id="nationalId" [(ngModel)]="nationalId">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="phone1" class="d-block w-100 mb-2">{{ 'phone' | translate }} </label>
-              <input type="text" class="form-control" id="phone1" [(ngModel)]="phone1">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="phone2" class="d-block w-100 mb-2">{{ 'phone' | translate }} (2)</label>
-              <input type="text" class="form-control" id="phone2" [(ngModel)]="phone2">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="role" class="d-block w-100 mb-2">{{ 'Role' | translate }}</label>
-              <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedRole"
-                (change)="onSelectionRolesChange()">
+              <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
+                (change)="onSelectionServicesChange()">
               </ng-select>
             </div>
           </div>
@@ -408,10 +385,23 @@
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="birthday" class="d-block w-100 mb-2">{{ 'Birthday' | translate }}</label>
-              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="birthday">
+              <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
+              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="visitDate">
             </div>
           </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
+                <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
+                <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
+            </div>
+        </div>
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
@@ -420,67 +410,10 @@
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="requestName" class="d-block w-100 mb-2">{{ 'requestName' | translate }}</label>
-              <input type="text" class="form-control" id="requestName" [(ngModel)]="requestName">
+                <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
+                <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="email" class="d-block w-100 mb-2">{{ 'Email' | translate }}</label>
-              <input type="email" class="form-control" id="email" [(ngModel)]="email">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="password" class="d-block w-100 mb-2">{{ 'Password' | translate }}</label>
-              <input type="password" class="form-control" id="password" [(ngModel)]="password">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
-              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
-                (change)="onSelectionServicesChange()">
-              </ng-select>
-            </div>
-
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label for="shifts" class="d-block w-100 mb-2">{{ 'Shifts' | translate }}</label>
-              <ng-select [items]="Shifts" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedShifts"
-                (change)="onSelectionShiftsChange()">
-              </ng-select>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="mb-3">
-              <label for="availability" class="d-block w-100 mb-2">{{ 'Availability' | translate }}</label>
-              <div>
-                <div *ngFor="let day of daysArray" class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" [id]="'day_' + day[0]" [value]="day[0]" [(ngModel)]="days[day[0]]">
-                  <label class="form-check-label" [for]="'day_' + day[0]">{{ getNameOfDays(day[1]) }}</label>
-                </div>
-                <!-- Add other checkboxes for each day -->
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="mb-3">
-              <label for="photo" class="d-block w-100 mb-2">
-                {{"attachPhoto" | translate}}
-                <span class="d-block form-text mt-0 mb-3">{{"allowedFilestypes" | translate}} png, jpg, jpeg.</span>
-              </label>
-              <div class="upload-request-img-wrapper">
-                <img src="../../../../../assets/images/avatar.svg" class="img-fluid" alt="">
-                <label class="upload-request-img-trigger" for="upload_request_img_btn">
-                  <i class="fa-solid fa-pen"></i>
-                  <input id="upload_request_img_btn" class="upload-request-img-btn" type="file" name="requestImg"
-                    accept=".png, .jpg, .jpeg" [(ngModel)]="photo">
-                </label>
-              </div>
-            </div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -493,6 +426,86 @@
       <button type="button" class="btn btn-primary" (click)="addRequest()">{{"addRequest" | translate}}</button>
     </div>
   </ng-template>
+
+  <!-- Edit Modal -->
+  <ng-template #editRequestModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">{{"editRequest" | translate}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="role" class="d-block w-100 mb-2">{{ 'Patient' | translate }}</label>
+              <ng-select [items]="Patients" [searchable]="true" bindLabel="Name" [(ngModel)]="selectedPatients"
+                (change)="onSelectionPatientsChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
+                (change)="onSelectionServicesChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="gender" class="d-block w-100 mb-2">{{ 'Gender' | translate }}</label>
+              <ng-select [items]="genders" [searchable]="false" [(ngModel)]="selectedGender"
+                (change)="onSelectionGenderChange()">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
+              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="visitDate">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
+                <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
+                <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
+            </div>
+        </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
+              <input type="text" class="form-control" id="address" [(ngModel)]="address">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
+                <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
+            </div>
+        </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
+        {{ 'close' | translate }}</button>
+      <button type="button" class="btn btn-primary" (click)="addRequest()">{{"editRequest" | translate}}</button>
+    </div>
+  </ng-template>
+
   <!-- if the cart is empaty  -->
   <ng-template #isEmpty>
     <app-is-empty class="d-block" style="margin-right: 8rem;"></app-is-empty>

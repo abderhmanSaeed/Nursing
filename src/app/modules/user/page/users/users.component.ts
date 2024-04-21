@@ -7,6 +7,7 @@ import { LookupsService } from '../../../../data/service/lookups.service';
 declare var bootstrap: any; // Declare bootstrap to use Bootstrap's JS
 import { Days } from '../../../../shared/Enums';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -70,7 +71,8 @@ export class UsersComponent implements OnInit {
   };
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal,
-    private lookupsService: LookupsService, private formBuilder: FormBuilder) {
+    private lookupsService: LookupsService, private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar) {
     // Initialize maxStartDate with today's date
     const today = new Date();
     this.maxStartDate = today.toISOString().split('T')[0];
@@ -152,7 +154,7 @@ export class UsersComponent implements OnInit {
           default:
             return null; // Handle unknown days if needed
         }
-      }).filter(Boolean),      currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
+      }).filter(Boolean), currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
       currentLong: 4.469936, // Assuming currentLat and currentLong are not available from console logs
     };
 
@@ -162,9 +164,17 @@ export class UsersComponent implements OnInit {
     // Call the API to add the user
     this.userService.addUser(user)
       .subscribe(
-        (response) => {
+        (response: any) => {
           console.log('User added successfully:', response);
           // Handle success response
+          // Handle success response
+          if (response && response.Success) {
+            this.getAllUsers();
+            // Close the modal
+            this.modalService.dismissAll();
+            // Show snackbar for 5 seconds
+            const currentLang = this.authService.getCurrentLanguage();
+            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' :'User added successfully!', 'Close', 5000);          }
         },
         (error) => {
           console.error('Error adding user:', error);
@@ -172,7 +182,11 @@ export class UsersComponent implements OnInit {
         }
       );
   }
-
+  showSnackBar(message: string, action: string, duration: number) {
+    this.snackBar.open(message, action, {
+      duration: duration,
+    });
+  }
 
   getAllUsers() {
     this.userService.getAllUsers(this.tenantId).subscribe({

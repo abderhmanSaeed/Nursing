@@ -21,5 +21,6 @@ export class APIs {
     public static getAllRoles = '/Roles';
     public static getAllServices = '/Services';
     public static getAllShifts = '/Shifts';
+    public static getAllPatients = '/Patients';
 
 }

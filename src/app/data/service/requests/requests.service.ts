@@ -14,9 +14,18 @@ export class RequestsService {
     const url = `${APIs.getAllRequests}?tenantId=${tenantId}&pageNumber=${1}&pazeSize=${10}`;
     return this.httpService.get<ApiResponse<RequestResponse>>(url);
   }
-  
+
   getAllRequests(tenantId: string): Observable<ApiResponse<RequestResponse>> {
     const url = `${APIs.getAllRequests}?tenantId=${tenantId}&pageNumber=${1}&pazeSize=${10}`;
     return this.httpService.get<ApiResponse<RequestResponse>>(url);
+  }
+
+  loadRequests(tenantId: string, pageNumber: number, pazeSize: number): Observable<ApiResponse<RequestResponse>> {
+    const url = `${APIs.getAllRequests}?tenantId=${tenantId}&pageNumber=${pageNumber}&pazeSize=${pazeSize}`;
+    return this.httpService.get<ApiResponse<RequestResponse>>(url);
+  }
+
+  addRequest(request: any) {
+    return this.httpService.post(APIs.getAllRequests, request);
   }
 }

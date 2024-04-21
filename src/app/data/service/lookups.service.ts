@@ -28,4 +28,10 @@ export class LookupsService {
 
     return this.httpService.get<ApiResponse<Lookup[]>>(url);
   }
+
+  getAllPatients(tenantId: string): Observable<ApiResponse<Lookup[]>> {
+    const url = `${APIs.getAllPatients}?tenantId=${tenantId}`;
+
+    return this.httpService.get<ApiResponse<Lookup[]>>(url);
+  }
 }
