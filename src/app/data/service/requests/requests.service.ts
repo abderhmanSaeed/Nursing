@@ -28,4 +28,7 @@ export class RequestsService {
   addRequest(request: any) {
     return this.httpService.post(APIs.getAllRequests, request);
   }
+  editRequest(request: any) {
+    return this.httpService.put(APIs.getAllRequests, request);
+  }
 }

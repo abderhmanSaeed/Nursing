@@ -32,7 +32,8 @@ export class ManageRequestsComponent implements OnInit {
   selectedServices: any[] = [];
   selectedShifts: any[] = [];
   tenantId = 'cc17f35c-e68e-4731-afd7-890ca46f741d'; // Example tenantId
-  showCopiedMessage: boolean = false;
+  showaddRequestMessage: boolean = false;
+  showeditRequestMessage: boolean = false;
   Roles: Lookup[] = [];
   Services: Lookup[] = [];
   Shifts: Lookup[] = [];
@@ -70,6 +71,7 @@ export class ManageRequestsComponent implements OnInit {
     notes: '',
   };
   Patients: Lookup[] = [];
+  editrequestObject: any;
 
   constructor(private requestsService: RequestsService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder,
@@ -141,11 +143,24 @@ export class ManageRequestsComponent implements OnInit {
           if (response && response.Success) {
             this.loadRequests();
 
-            // Close the modal
-            this.modalService.dismissAll();
-            // Show snackbar for 5 seconds
-            const currentLang = this.authService.getCurrentLanguage();
-            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة الطلب' : 'Request added successfully!', 'Close', 5000);
+            this.selectedGender = '',
+              this.visitDate = '',
+              this.tenantId = '',
+              this.visitTimeFrom = '',
+              this.visitTimeTo = '',
+              this.address = '',
+              this.selectedPatients = '',
+              this.selectedServices = [],
+              this.notes = '',
+
+              // Close the modal
+              this.modalService.dismissAll();
+            this.showaddRequestMessage = true;
+
+            // Hide the message after a delay (e.g., 3 seconds)
+            setTimeout(() => {
+              this.showaddRequestMessage = false;
+            }, 3000);
           }
         },
         (error) => {
@@ -154,17 +169,20 @@ export class ManageRequestsComponent implements OnInit {
         }
       );
   }
-  editRequest(){
-     // Dynamically create the request object using values from the console logs
-     const editRequest = {
+  editRequest() {
+    // Dynamically edit the request object using values from the console logs
+    const editRequest = {
+      id: this.editrequestObject.Id,
       isMale: this.selectedGender === "Male" ? 1 : 0,
       visitDate: this.visitDate,
       tenantId: this.tenantId,
       visitTimeFrom: this.visitTimeFrom,
       visitTimeTo: this.visitTimeTo,
       location: this.address,
-      patientId: this.selectedPatients.Id,
-      serviceIds: this.selectedServices.map(service => service.Id),
+      patientId: this.selectedPatients.Id ? this.selectedPatients.Id : this.editrequestObject.PatientId,
+      serviceIds: Array.isArray(this.selectedServices) && this.selectedServices.length > 0 && typeof this.selectedServices[0] === 'object' ?
+        this.selectedServices.map(service => service.Id) :
+        this.editrequestObject.ServiceIds,
       notes: this.notes,
       statusId: 1,
       currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
@@ -173,6 +191,33 @@ export class ManageRequestsComponent implements OnInit {
 
     // Log the dynamically created request object
     console.log('Request object:', editRequest);
+    console.log('Response Request object:', this.editrequestObject);
+
+    // Call the API to add the request
+    // Call the API to add the request
+    this.requestService.editRequest(editRequest)
+      .subscribe(
+        (response: any) => {
+          console.log('Request added successfully:', response);
+          // Handle success response
+          if (response && response.Success) {
+            this.loadRequests();
+
+            // Close the modal
+            this.modalService.dismissAll();
+            this.showeditRequestMessage = true;
+
+            // Hide the message after a delay (e.g., 3 seconds)
+            setTimeout(() => {
+              this.showeditRequestMessage = false;
+            }, 3000);
+          }
+        },
+        (error) => {
+          console.error('Error adding request:', error);
+          // Handle error response
+        }
+      );
 
   }
   showSnackBar(message: string, action: string, duration: number) {
@@ -270,7 +315,7 @@ export class ManageRequestsComponent implements OnInit {
       this.visitTimeTo = item.VisitTimeTo;
       this.address = item.Location;
       this.notes = item.Notes;
-
+      this.editrequestObject = item;
       this.modalService.open(this.editRequestModal, { size: 'lg' });
     });
   }

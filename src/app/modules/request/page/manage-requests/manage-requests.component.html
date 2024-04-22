@@ -1,8 +1,10 @@
 <main>
+  <div *ngIf="showaddRequestMessage" class="copied-message">{{"addRequestMessage" | translate}}</div>
+  <div *ngIf="showeditRequestMessage" class="copied-message">{{"editRequestMessage" | translate}}</div>
+
   <!-- request-list.component.html -->
   <div class="card border-0 p-3 rounded-4 mb-3">
     <div class="card-body">
-      <div *ngIf="showCopiedMessage" class="copied-message">{{"linkCopied" | translate}}</div>
 
       <div class="accordion accordion-style-1" id="accordionExample">
         <div class="accordion-item">
@@ -386,7 +388,7 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
-              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="visitDate">
+              <input type="date" class="form-control"  placeholder="Choose a date" [(ngModel)]="visitDate">
             </div>
           </div>
           <div class="col-lg-6">
@@ -465,7 +467,7 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
-              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="visitDate">
+              <input type="date" class="form-control"  placeholder="Choose a date" [(ngModel)]="visitDate">
             </div>
           </div>
           <div class="col-lg-6">

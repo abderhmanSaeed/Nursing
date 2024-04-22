@@ -103,7 +103,10 @@
   "visitTimeTo":"visit Time To",
   "location": "Location",
   "notes": "Notes",
-  "patientPhone": "Patient Phone"
+  "patientPhone": "Patient Phone",
+  "addRequestMessage":"Request added successfully!",
+  "editRequestMessage":"Request Reedit successfully!",
+  "systemRequests":"system Requests"
 
 
 

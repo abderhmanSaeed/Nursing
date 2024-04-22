@@ -105,7 +105,12 @@
   "visitTimeTo":"الزيارة إلي",
   "location": "الموقع",
   "notes": "ملاحظات",
-  "patientPhone": "هاتف المريض"
+  "patientPhone": "هاتف المريض",
+  "addRequestMessage":"تم إضافة الطلب",
+  "editRequestMessage":"تم تعديل الطلب",
+  "systemRequests":"طلبات النظام"
+
+
 
 
 
