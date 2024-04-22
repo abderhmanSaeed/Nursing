@@ -8,6 +8,7 @@ import { Days } from '../../../../shared/Enums';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestsService } from '../../../../data/service/requests/requests.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-manage-requests',
@@ -72,7 +73,8 @@ export class ManageRequestsComponent implements OnInit {
 
   constructor(private requestsService: RequestsService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder,
-    private requestService: RequestsService, private snackBar: MatSnackBar) {
+    private requestService: RequestsService, private snackBar: MatSnackBar,
+    private ngZone: NgZone) {
     // Initialize maxStartDate with today's date
     const today = new Date();
     this.maxStartDate = today.toISOString().split('T')[0];
@@ -152,7 +154,27 @@ export class ManageRequestsComponent implements OnInit {
         }
       );
   }
+  editRequest(){
+     // Dynamically create the request object using values from the console logs
+     const editRequest = {
+      isMale: this.selectedGender === "Male" ? 1 : 0,
+      visitDate: this.visitDate,
+      tenantId: this.tenantId,
+      visitTimeFrom: this.visitTimeFrom,
+      visitTimeTo: this.visitTimeTo,
+      location: this.address,
+      patientId: this.selectedPatients.Id,
+      serviceIds: this.selectedServices.map(service => service.Id),
+      notes: this.notes,
+      statusId: 1,
+      currentLat: 50.503887, // Assuming currentLat and currentLong are not available from console logs
+      currentLong: 4.469936, // Assuming currentLat and currentLong are not available from console logs
+    };
 
+    // Log the dynamically created request object
+    console.log('Request object:', editRequest);
+
+  }
   showSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
       duration: duration,
@@ -230,20 +252,27 @@ export class ManageRequestsComponent implements OnInit {
 
 
   openEditModal(item: any): void {
-    console.log(item);
-    this.selectedPatients = item.PatientId;
-    this.selectedServices = item.Services;
-    this.selectedGender = item.Gender === 1 ? 'Male' : 'Female';
-    this.visitDate = item.visitDate;
-    this.visitTimeFrom = item.visitTimeFrom;
-    this.visitTimeTo = item.visitTimeTo;
-    this.address = item.Location;
-    this.notes = item.Notes;
-    // Assuming you have an editRequestModal defined in your component
-    this.modalService.open(this.editRequestModal, { size: 'lg' });
-    // Now, you can set the data of the item to the modal for editing
-    // Example: this.editModalData = item;
-    // Then, in the modal component, you can bind the data to form fields for editing
+    this.ngZone.run(() => {
+      this.selectedPatients = item.PatientName;
+      this.selectedServices = item.Services;
+      this.selectedGender = item.Gender === 1 ? 'Male' : 'Female';
+      // Convert VisitDate to "YYYY-MM-DD" format
+      if (item.VisitDate) {
+        const date = new Date(item.VisitDate);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        this.visitDate = `${year}-${month}-${day}`;
+      } else {
+        this.visitDate = ''; // Set to empty string if VisitDate is not provided
+      }
+      this.visitTimeFrom = item.VisitTimeFrom;
+      this.visitTimeTo = item.VisitTimeTo;
+      this.address = item.Location;
+      this.notes = item.Notes;
+
+      this.modalService.open(this.editRequestModal, { size: 'lg' });
+    });
   }
   nextPage() {
     const totalItems = this.filteredRequests.length;
