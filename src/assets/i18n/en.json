@@ -43,7 +43,7 @@
   "forgotpasswordMsg": "A temporary password has been sent to your mobile via SMS.",
   "confirm": "Confirm",
   "guest": "Guest",
-  "usernameOrMobile": "Username or Mobile",
+  "usernameOrMobile": "Email or Mobile",
   "patientNameOrMobile": "patient Name Or Mobile",
   "userEmpty": "Your users is empty",
   "number": "#",
@@ -70,6 +70,7 @@
   "male":"Male",
   "female":"female",
   "Gender": "Gender",
+  "visitorGender": "Visitor Gender",
   "Address": "Address",
   "Role": "Role",
   "Availability": "Availability",
@@ -92,21 +93,22 @@
   "Thu" : "Thu",
   "Fri" : "Fri",
   "Sat" : "Sat",
-  "moreThan" : "More than 400+ new members",
+  "moreThan" : "More than",
+  "newRequestes": "new requests",
   "patientName": "Patient Name",
   "services": "Services",
   "assignedUserIds": "Assigned User IDs",
   "assignedUsers": "Assigned Users",
   "requestNumber": "Request Number",
   "visitDate": "Visit Date",
-  "visitTimeFrom":"visit Time From",
-  "visitTimeTo":"visit Time To",
+  "visitTimeFrom":"Visit Time From",
+  "visitTimeTo":"Visit Time To",
   "location": "Location",
   "notes": "Notes",
   "patientPhone": "Patient Phone",
   "addRequestMessage":"Request added successfully!",
   "editRequestMessage":"Request Reedit successfully!",
-  "systemRequests":"system Requests"
+  "systemRequests":"System Requests"
 
 
 

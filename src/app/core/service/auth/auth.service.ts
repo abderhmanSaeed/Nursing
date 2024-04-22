@@ -63,7 +63,7 @@ export class AuthService {
     try {
       const tokenLocalStorage = localStorage?.getItem('token');
       return tokenLocalStorage || null;
-    } catch (error) {debugger
+    } catch (error) {
       console.error('Error accessing localStorage:', error);
       return null;
     }

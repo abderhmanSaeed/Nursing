@@ -16,33 +16,33 @@
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <div class="container-fluid p-0">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <app-input-filed [label]="'patientNameOrMobile' | translate"
-                          [placeholder]="'patientNameOrMobile' | translate" [name]="'patientNameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
-                          (nameChanged)="handleInputChange($event)">
-                        </app-input-filed>
-                        <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
+              <div class="container-fluid p-0">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <app-input-filed [label]="'patientNameOrMobile' | translate"
+                        [placeholder]="'patientNameOrMobile' | translate" [name]="'patientNameOrMobile'" [type]="'text'"
+                        [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                        (nameChanged)="handleInputChange($event)">
+                      </app-input-filed>
+                      <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
                           bindLabel="name" bindValue="id">
                           <ng-option [value]="">selectRole</ng-option>
                           <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
                         </ng-select> -->
 
 
-                      </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <!-- <app-input-filed [label]="'patientNameOrMobile' | translate"
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <!-- <app-input-filed [label]="'patientNameOrMobile' | translate"
                           [placeholder]="'patientNameOrMobile' | translate" [name]="'patientNameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
                         </app-input-filed> -->
 
-                        <div class="filter-section">
-                          <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+                      <div class="filter-section">
+                        <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
                             <option value="" translate="selectRole"></option>
                             <option value="1" translate="admin"></option>
                             <option value="2" translate="employee"></option>
@@ -50,16 +50,16 @@
                           </select> -->
 
 
-                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="d-flex justify-content-end">
-                      <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
                   </div>
                 </div>
+              </div>
 
             </div>
           </div>
@@ -72,7 +72,7 @@
       <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
         <div>
           <h5 class="card-title">{{"systemRequests" | translate}}</h5>
-          <p class="card-subtitle">{{"moreThan" | translate}}</p>
+          <p class="card-subtitle">{{"moreThan" | translate}} {{filteredRequests.length}} {{"newRequestes" | translate}} </p>
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addRequest" | translate}}</button>
@@ -107,7 +107,7 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let request of filteredRequests; let i = index">
+            <tr *ngFor="let request of filteredRequests; let i = index else isEmpty">
               <th scope="row">{{ (currentPage-1) * itemsPerPage + i + 1 }}</th>
               <td>{{ request?.PatientName }}</td>
               <td>{{ request?.PatientPhone }}</td>
@@ -150,7 +150,8 @@
                   <li>
                     <a (click)="openEditModal(request)">
                       <i class="fa-regular fa-pen-to-square"></i>
-                    </a>                  </li>
+                    </a>
+                  </li>
                   <li>
                     <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                   </li>
@@ -258,8 +259,9 @@
                 <i class="fa-solid fa-chevron-left"></i>
               </a>
             </li>
-            <li class="page-item" [ngClass]="{'active': page === currentPage, 'cursor-pointer-on-hover': true}" *ngFor="let page of [1, 2, 3]"> <!-- Assuming you have a fixed number of pages -->
-              <a class="page-link"  (click)="onPageChange(page)">
+            <li class="page-item" [ngClass]="{'active': page === currentPage, 'cursor-pointer-on-hover': true}"
+              *ngFor="let page of [1, 2, 3]"> <!-- Assuming you have a fixed number of pages -->
+              <a class="page-link" (click)="onPageChange(page)">
                 {{ page }}
               </a>
             </li>
@@ -372,14 +374,14 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
-              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
-                (change)="onSelectionServicesChange()">
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true"
+                [(ngModel)]="selectedServices" (change)="onSelectionServicesChange()">
               </ng-select>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="gender" class="d-block w-100 mb-2">{{ 'Gender' | translate }}</label>
+              <label for="gender" class="d-block w-100 mb-2">{{ 'visitorGender' | translate }}</label>
               <ng-select [items]="genders" [searchable]="false" [(ngModel)]="selectedGender"
                 (change)="onSelectionGenderChange()">
               </ng-select>
@@ -388,22 +390,22 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
-              <input type="date" class="form-control"  placeholder="Choose a date" [(ngModel)]="visitDate">
+              <input type="date" class="form-control" placeholder="Choose a date" [(ngModel)]="visitDate">
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-                <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
-                <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
+              <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
+              <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
             </div>
-        </div>
+          </div>
 
-        <div class="col-lg-6">
+          <div class="col-lg-6">
             <div class="mb-3">
-                <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
-                <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
+              <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
+              <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
             </div>
-        </div>
+          </div>
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
@@ -412,10 +414,10 @@
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-                <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
-                <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
+              <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
+              <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
             </div>
-        </div>
+          </div>
         </div>
       </div>
 
@@ -451,14 +453,14 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
-              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
-                (change)="onSelectionServicesChange()">
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true"
+                [(ngModel)]="selectedServices" (change)="onSelectionServicesChange()">
               </ng-select>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="gender" class="d-block w-100 mb-2">{{ 'Gender' | translate }}</label>
+              <label for="gender" class="d-block w-100 mb-2">{{ 'visitorGender' | translate }}</label>
               <ng-select [items]="genders" [searchable]="false" [(ngModel)]="selectedGender"
                 (change)="onSelectionGenderChange()">
               </ng-select>
@@ -467,22 +469,22 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
-              <input type="date" class="form-control"  placeholder="Choose a date" [(ngModel)]="visitDate">
+              <input type="date" class="form-control" placeholder="Choose a date" [(ngModel)]="visitDate">
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-                <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
-                <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
+              <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
+              <input type="time" class="form-control" [(ngModel)]="visitTimeFrom">
             </div>
-        </div>
+          </div>
 
-        <div class="col-lg-6">
+          <div class="col-lg-6">
             <div class="mb-3">
-                <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
-                <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
+              <label for="visitTimeTo" class="d-block w-100 mb-2">{{ 'visitTimeTo' | translate }}</label>
+              <input type="time" class="form-control" [(ngModel)]="visitTimeTo">
             </div>
-        </div>
+          </div>
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="address" class="d-block w-100 mb-2">{{ 'Address' | translate }}</label>
@@ -491,10 +493,10 @@
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-                <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
-                <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
+              <label for="Nots" class="d-block w-100 mb-2">{{ 'notes' | translate }}</label>
+              <textarea class="form-control" id="Nots" [(ngModel)]="notes"></textarea>
             </div>
-        </div>
+          </div>
         </div>
       </div>
 

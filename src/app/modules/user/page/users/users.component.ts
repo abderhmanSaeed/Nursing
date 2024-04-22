@@ -125,6 +125,7 @@ export class UsersComponent implements OnInit {
     const user = {
       fullName: this.fullName,
       nationalId: this.nationalId,
+      tenantId: this.tenantId,
       phones: [this.phone1, this.phone2],
       isMale: this.selectedGender === "Male",
       birthDate: this.birthday,

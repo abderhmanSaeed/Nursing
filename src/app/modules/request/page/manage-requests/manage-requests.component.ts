@@ -145,7 +145,6 @@ export class ManageRequestsComponent implements OnInit {
 
             this.selectedGender = '',
               this.visitDate = '',
-              this.tenantId = '',
               this.visitTimeFrom = '',
               this.visitTimeTo = '',
               this.address = '',
