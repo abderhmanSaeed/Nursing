@@ -28,4 +28,7 @@ export interface User {
 }
 
 // Optionally, if you want to specifically type the 'Data' field for the GetAllUsers response:
-export type UsersResponse = User[];
+export interface UsersResponse {
+  Users: User[]; // Change the property name to 'Requests'
+  Total: number;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ApiResponse, Lookup, User } from '../../../../shared/models';
+import { ApiResponse, Lookup, User, UsersResponse } from '../../../../shared/models';
 import { UserService } from '../../../../data/service/user/user.service';
 import { AuthService } from '../../../../core/service/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,8 @@ export class UsersComponent implements OnInit {
   @ViewChild('addUserModal') addUserModal: TemplateRef<any> | undefined;
 
   users: User[] = [];
+  totalItems = 0;
+
   searchTerm: string = '';
   selectedRoleId: any;  // Variable to hold the selected role ID
   currentPage = 1;
@@ -50,6 +52,8 @@ export class UsersComponent implements OnInit {
   userName: string = '';
   email: string = '';
   password: string = '';
+  repeatPassword: string = '';
+  passwordsMatch: boolean = true;
   days: any = {};
   photo: string = '';
   user = {
@@ -69,6 +73,8 @@ export class UsersComponent implements OnInit {
     days: {},
     photo: ''
   };
+  isShowPassword: boolean = false
+  type: 'text' | 'password' = 'password'
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder,
@@ -115,6 +121,20 @@ export class UsersComponent implements OnInit {
     } else {
       // Handle form validation errors
     }
+  }
+  checkPassword() {
+    // Check if passwords match
+    this.passwordsMatch = this.password === this.repeatPassword;
+  }
+  toggleShowPassword() {
+    this.isShowPassword = !this.isShowPassword
+
+    if (this.isShowPassword) {
+      this.type = 'text'
+    } else {
+      this.type = 'password'
+    }
+    console.log(this.isShowPassword)
   }
   // Method to add a new phone control to the phones form array
   addPhone(): void {
@@ -175,7 +195,8 @@ export class UsersComponent implements OnInit {
             this.modalService.dismissAll();
             // Show snackbar for 5 seconds
             const currentLang = this.authService.getCurrentLanguage();
-            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' :'User added successfully!', 'Close', 5000);          }
+            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' : 'User added successfully!', 'Close', 5000);
+          }
         },
         (error) => {
           console.error('Error adding user:', error);
@@ -191,9 +212,11 @@ export class UsersComponent implements OnInit {
 
   getAllUsers() {
     this.userService.getAllUsers(this.tenantId).subscribe({
-      next: (response: ApiResponse<User[]>) => {
+      next: (response: ApiResponse<UsersResponse>) => {
         if (response.Success && response.Data) {
-          this.users = response.Data;
+          this.users = response.Data.Users;
+          this.totalItems = response.Data.Total;
+
         } else {
           console.error('Failed to load users:', response.Message);
         }

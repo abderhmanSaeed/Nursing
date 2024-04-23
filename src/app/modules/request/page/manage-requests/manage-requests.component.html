@@ -72,7 +72,7 @@
       <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
         <div>
           <h5 class="card-title">{{"systemRequests" | translate}}</h5>
-          <p class="card-subtitle">{{"moreThan" | translate}} {{filteredRequests.length}} {{"newRequestes" | translate}} </p>
+          <p class="card-subtitle">{{"moreThan" | translate}} {{totalItems}} {{"newRequestes" | translate}} </p>
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addRequest" | translate}}</button>
@@ -254,18 +254,17 @@
       <div class="pagination-wrapper">
         <nav aria-label="Page navigation example">
           <ul class="pagination pagination-sm">
-            <li class="page-item">
+            <li class="page-item" [class.disabled]="currentPage === 1">
               <a class="page-link" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
                 <i class="fa-solid fa-chevron-left"></i>
               </a>
             </li>
-            <li class="page-item" [ngClass]="{'active': page === currentPage, 'cursor-pointer-on-hover': true}"
-              *ngFor="let page of [1, 2, 3]"> <!-- Assuming you have a fixed number of pages -->
+            <li class="page-item"  [ngClass]="{'active': page === currentPage, 'cursor-pointer-on-hover': true}" *ngFor="let page of getPaginationArray()">
               <a class="page-link" (click)="onPageChange(page)">
                 {{ page }}
               </a>
             </li>
-            <li class="page-item">
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
               <a class="page-link" aria-label="Next" (click)="onPageChange(currentPage + 1)">
                 <i class="fa-solid fa-chevron-right"></i>
               </a>
@@ -273,6 +272,7 @@
           </ul>
         </nav>
       </div>
+
     </div>
   </div>
 

@@ -15,6 +15,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SideBarComponent } from './layout/sidebar/sidebar.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SideBarComponent } from './layout/sidebar/sidebar.component';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

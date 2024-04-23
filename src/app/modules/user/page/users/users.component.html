@@ -423,9 +423,19 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="password" class="d-block w-100 mb-2">{{ 'Password' | translate }}</label>
-              <input type="password" class="form-control" id="password" [(ngModel)]="password">
+              <input type="password" class="form-control" id="password" [(ngModel)]="password" [ngClass]="{'password-mismatch': !passwordsMatch}">
             </div>
           </div>
+
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label for="repeatPassword" class="d-block w-100 mb-2">{{ 'Repeat Password' | translate }}</label>
+              <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatPassword" (blur)="checkPassword()" [ngClass]="{'password-mismatch': !passwordsMatch}">
+              <div *ngIf="password && repeatPassword && !passwordsMatch" class="text-danger">Passwords does not match.</div>
+            </div>
+          </div>
+
+
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>

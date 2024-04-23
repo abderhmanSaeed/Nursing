@@ -20,8 +20,11 @@ export class ManageRequestsComponent implements OnInit {
   @ViewChild('addRequestModal') addRequestModal: TemplateRef<any> | undefined;
   @ViewChild('editRequestModal') editRequestModal: TemplateRef<any> | undefined;
   requests: Requests[] = [];
-  currentPage: number = 1;
-  pageSize: number = 10;
+  total: any;
+  currentPage = 1;
+  pageSize = 10; // Number of items per page
+  totalPages = 0;
+  totalItems = 0;
   searchTerm: string = '';
   selectedNurseId: any;  // Variable to hold the selected role ID
   itemsPerPage = 10; // Show one request per page
@@ -226,11 +229,21 @@ export class ManageRequestsComponent implements OnInit {
   }
 
 
+  onPageChange(pageNumber: number): void {
+    if (pageNumber < 1 || pageNumber > this.totalPages) {
+      return;
+    }
+    this.currentPage = pageNumber;
+    this.loadRequests();
+  }
+
   loadRequests(): void {
     this.requestsService.loadRequests(this.tenantId, this.currentPage, this.pageSize).subscribe({
       next: (response: ApiResponse<RequestResponse>) => {
         if (response.Success && response.Data) {
-          this.requests = response.Data;
+          this.requests = response.Data.Requests;
+          this.totalItems = response.Data.Total;
+          this.totalPages = Math.ceil(this.totalItems / this.pageSize);
         } else {
           console.error('Failed to load requests:', response.Message);
         }
@@ -241,9 +254,9 @@ export class ManageRequestsComponent implements OnInit {
     });
   }
 
-  onPageChange(pageNumber: number): void {
-    this.currentPage = pageNumber;
-    this.loadRequests();
+  getPaginationArray(): number[] {
+    // Generate an array of page numbers based on the total pages
+    return Array(this.totalPages).fill(0).map((x, i) => i + 1);
   }
   loadLookups() {
     this.loadPatients();

@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../../../core/service/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RequestsService } from '../../../../data/service/requests/requests.service';
-import { ApiResponse, Lookup, Requests } from '../../../../shared/models';
+import { ApiResponse, Lookup, RequestResponse, Requests } from '../../../../shared/models';
 import { LookupsService } from '../../../../data/service/lookups.service';
 declare var bootstrap: any; // Declare bootstrap to use Bootstrap's JS
 
@@ -39,9 +39,9 @@ export class RequestsComponent implements OnInit {
 
   getAllRequests() {
     this.requestsService.getAllRequests(this.tenantId).subscribe({
-      next: (response: ApiResponse<Requests[]>) => {
+      next: (response: ApiResponse<RequestResponse>) => {
         if (response.Success && response.Data) {
-          this.requests = response.Data;
+          this.requests = response.Data.Requests;
         } else {
           console.error('Failed to load users:', response.Message);
         }
@@ -50,6 +50,7 @@ export class RequestsComponent implements OnInit {
         console.error('There was an error fetching the users:', error);
       }
     });
+
   }
 
 
