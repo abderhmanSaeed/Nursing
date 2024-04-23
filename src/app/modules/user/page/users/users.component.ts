@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   totalItems = 0;
 
+  pageSize: number = 10; // Change this value as needed
   searchTerm: string = '';
   selectedRoleId: any;  // Variable to hold the selected role ID
   currentPage = 1;
@@ -74,7 +75,6 @@ export class UsersComponent implements OnInit {
     photo: ''
   };
   isShowPassword: boolean = false
-  type: 'text' | 'password' = 'password'
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder,
@@ -125,16 +125,6 @@ export class UsersComponent implements OnInit {
   checkPassword() {
     // Check if passwords match
     this.passwordsMatch = this.password === this.repeatPassword;
-  }
-  toggleShowPassword() {
-    this.isShowPassword = !this.isShowPassword
-
-    if (this.isShowPassword) {
-      this.type = 'text'
-    } else {
-      this.type = 'password'
-    }
-    console.log(this.isShowPassword)
   }
   // Method to add a new phone control to the phones form array
   addPhone(): void {
@@ -195,8 +185,7 @@ export class UsersComponent implements OnInit {
             this.modalService.dismissAll();
             // Show snackbar for 5 seconds
             const currentLang = this.authService.getCurrentLanguage();
-            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' : 'User added successfully!', 'Close', 5000);
-          }
+            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' :'User added successfully!', 'Close', 5000);          }
         },
         (error) => {
           console.error('Error adding user:', error);
@@ -214,9 +203,8 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers(this.tenantId).subscribe({
       next: (response: ApiResponse<UsersResponse>) => {
         if (response.Success && response.Data) {
-          this.users = response.Data.Users;
           this.totalItems = response.Data.Total;
-
+          this.users = response.Data.Users.slice(0, this.pageSize);
         } else {
           console.error('Failed to load users:', response.Message);
         }
@@ -225,6 +213,22 @@ export class UsersComponent implements OnInit {
         console.error('There was an error fetching the users:', error);
       }
     });
+  }
+  totalPages(): number {
+    return Math.ceil(this.totalItems / this.pageSize);
+  }
+
+  pages(): number[] {
+    const pageCount = this.totalPages();
+    const visiblePages = Math.min(pageCount, 3); // Show at most 3 pages
+    const startPage = Math.max(1, this.currentPage - 1); // Start from currentPage - 1
+    return Array.from({ length: visiblePages }, (_, i) => startPage + i);
+  }
+
+  pageChanged(page: number): void {
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.pageSize;
+    this.users = this.users.slice(startIndex, startIndex + this.pageSize);
   }
   loadRoles() {
     this.lookupsService.getAllRoles(this.tenantId).subscribe(response => {

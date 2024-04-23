@@ -14,36 +14,37 @@
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <div class="container-fluid p-0">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <app-input-filed [label]="'usernameOrMobile' | translate"
-                          [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
-                          [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
-                          (nameChanged)="handleInputChange($event)">
-                        </app-input-filed>
-                        <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
+              <div class="container-fluid p-0">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <app-input-filed [label]="'usernameOrMobile' | translate"
+                        [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
+                        [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}"
+                        (nameChanged)="handleInputChange($event)">
+                      </app-input-filed>
+                      <!-- <ng-select [items]="Roles" [(ngModel)]="selectedRoleId" (change)="filterByRole()"
                           bindLabel="name" bindValue="id">
                           <ng-option [value]="">selectRole</ng-option>
                           <ng-option [value]="role.Id" *ngFor="let role of Roles">{{ role.Name }}</ng-option>
                         </ng-select> -->
-                        <ng-select id="selectedRoleId" [(ngModel)]="selectedRoleId" [placeholder]= '("selectRole" | translate)'
-                          (change)="onSellerSelected($event)"  [searchable]="true">)
-                          <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
-                        </ng-select>
+                      <ng-select id="selectedRoleId" [(ngModel)]="selectedRoleId"
+                        [placeholder]='("selectRole" | translate)' (change)="onSellerSelected($event)"
+                        [searchable]="true">)
+                        <ng-option *ngFor="let role of Roles" [value]="role.Id">{{role.Name}}</ng-option>
+                      </ng-select>
 
-                      </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="mb-3">
-                        <!-- <app-input-filed [label]="'usernameOrMobile' | translate"
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <!-- <app-input-filed [label]="'usernameOrMobile' | translate"
                           [placeholder]="'usernameOrMobile' | translate" [name]="'usernameOrMobile'" [type]="'text'"
                           [classes]="{input: 'form-control', label: 'form-label', base: 'input-group'}">
                         </app-input-filed> -->
 
-                        <div class="filter-section">
-                          <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
+                      <div class="filter-section">
+                        <!-- <select class="form-select" [(ngModel)]="selectedRoleId" (change)="filterByRole()">
                             <option value="" translate="selectRole"></option>
                             <option value="1" translate="admin"></option>
                             <option value="2" translate="employee"></option>
@@ -51,16 +52,16 @@
                           </select> -->
 
 
-                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="d-flex justify-content-end">
-                      <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary">{{"search" | translate}}</button>
                   </div>
                 </div>
+              </div>
 
             </div>
           </div>
@@ -73,7 +74,7 @@
       <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
         <div>
           <h5 class="card-title">{{"systemUsers" | translate}}</h5>
-          <p class="card-subtitle">{{"moreThan" | translate}}</p>
+          <p class="card-subtitle">{{"moreThan" | translate}} {{totalItems}}</p>
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addUser" | translate}}</button>
@@ -122,11 +123,11 @@
               <td>{{ user.Phones[0] }}</td>
               <td>{{ user.IsMale ? ('male' | translate) : ('female' | translate) }}</td>
               <td>{{ user?.UserLocation }}</td>
-                <td>
-                  <ul  class="dayes">
-                    <li  *ngFor="let day of user.WorksingDays" >{{ getNameOfDays(day) }}</li>
-                  </ul>
-                </td>
+              <td>
+                <ul class="dayes">
+                  <li *ngFor="let day of user.WorksingDays">{{ getNameOfDays(day) }}</li>
+                </ul>
+              </td>
               <td>
                 <ul class="action">
                   <!-- <li >
@@ -240,32 +241,35 @@
       <div class="pagination-wrapper">
         <nav aria-label="Page navigation example">
           <ul class="pagination pagination-sm">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="First">
+            <li class="page-item" (click)="pageChanged(1)">
+              <a class="page-link" aria-label="First">
                 <i class="fa-solid fa-angles-left"></i>
               </a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+            <li class="page-item" (click)="pageChanged(currentPage - 1)" [class.disabled]="currentPage === 1">
+              <a class="page-link" aria-label="Previous">
                 <i class="fa-solid fa-chevron-left"></i>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+            <li class="page-item" *ngFor="let page of pages()" [class.active]="currentPage === page">
+              <a class="page-link" (click)="pageChanged(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" (click)="pageChanged(currentPage + 1)" [class.disabled]="currentPage === totalPages()">
+              <a class="page-link" aria-label="Next">
                 <i class="fa-solid fa-chevron-right"></i>
               </a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Last">
+            <li class="page-item" (click)="pageChanged(totalPages())">
+              <a class="page-link" aria-label="Last">
                 <i class="fa-solid fa-angles-right"></i>
               </a>
             </li>
           </ul>
         </nav>
       </div>
+
+
+
     </div>
   </div>
 
@@ -383,8 +387,8 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="role" class="d-block w-100 mb-2">{{ 'Role' | translate }}</label>
-              <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedRole"
-                (change)="onSelectionRolesChange()">
+              <ng-select [items]="Roles" [searchable]="true" bindLabel="Name" [multiple]="true"
+                [(ngModel)]="selectedRole" (change)="onSelectionRolesChange()">
               </ng-select>
             </div>
           </div>
@@ -399,7 +403,8 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="birthday" class="d-block w-100 mb-2">{{ 'Birthday' | translate }}</label>
-              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date" [(ngModel)]="birthday">
+              <input type="date" class="form-control" [max]="maxStartDate" placeholder="Choose a date"
+                [(ngModel)]="birthday">
             </div>
           </div>
           <div class="col-lg-6">
@@ -423,15 +428,18 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="password" class="d-block w-100 mb-2">{{ 'Password' | translate }}</label>
-              <input type="password" class="form-control" id="password" [(ngModel)]="password" [ngClass]="{'password-mismatch': !passwordsMatch}">
+              <input type="password" class="form-control" id="password" [(ngModel)]="password"
+                [ngClass]="{'password-mismatch': !passwordsMatch}">
             </div>
           </div>
 
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="repeatPassword" class="d-block w-100 mb-2">{{ 'Repeat Password' | translate }}</label>
-              <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatPassword" (blur)="checkPassword()" [ngClass]="{'password-mismatch': !passwordsMatch}">
-              <div *ngIf="password && repeatPassword && !passwordsMatch" class="text-danger">Passwords does not match.</div>
+              <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatPassword"
+                (blur)="checkPassword()" [ngClass]="{'password-mismatch': !passwordsMatch}">
+              <div *ngIf="password && repeatPassword && !passwordsMatch" class="text-danger">Passwords does not match.
+              </div>
             </div>
           </div>
 
@@ -439,8 +447,8 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="services" class="d-block w-100 mb-2">{{ 'Services' | translate }}</label>
-              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedServices"
-                (change)="onSelectionServicesChange()">
+              <ng-select [items]="Services" [searchable]="true" bindLabel="Name" [multiple]="true"
+                [(ngModel)]="selectedServices" (change)="onSelectionServicesChange()">
               </ng-select>
             </div>
 
@@ -448,8 +456,8 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="shifts" class="d-block w-100 mb-2">{{ 'Shifts' | translate }}</label>
-              <ng-select [items]="Shifts" [searchable]="true" bindLabel="Name" [multiple]="true" [(ngModel)]="selectedShifts"
-                (change)="onSelectionShiftsChange()">
+              <ng-select [items]="Shifts" [searchable]="true" bindLabel="Name" [multiple]="true"
+                [(ngModel)]="selectedShifts" (change)="onSelectionShiftsChange()">
               </ng-select>
             </div>
           </div>
@@ -458,7 +466,8 @@
               <label for="availability" class="d-block w-100 mb-2">{{ 'Availability' | translate }}</label>
               <div>
                 <div *ngFor="let day of daysArray" class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" [id]="'day_' + day[0]" [value]="day[0]" [(ngModel)]="days[day[0]]">
+                  <input class="form-check-input" type="checkbox" [id]="'day_' + day[0]" [value]="day[0]"
+                    [(ngModel)]="days[day[0]]">
                   <label class="form-check-label" [for]="'day_' + day[0]">{{ getNameOfDays(day[1]) }}</label>
                 </div>
                 <!-- Add other checkboxes for each day -->
