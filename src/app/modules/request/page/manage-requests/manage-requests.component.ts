@@ -45,6 +45,7 @@ export class ManageRequestsComponent implements OnInit {
   selectedRoleId: string = ''; // Variable to hold the selected role ID
 
   maxStartDate: string;
+  minDate: string;
   requestForm!: FormGroup; // Using definite assignment assertion
   fullName: string = '';
   nationalId: string = '';
@@ -83,6 +84,7 @@ export class ManageRequestsComponent implements OnInit {
     // Initialize maxStartDate with today's date
     const today = new Date();
     this.maxStartDate = today.toISOString().split('T')[0];
+    this.minDate = today.toISOString().split('T')[0];
     this.daysArray = Object.entries(Days);
   }
 
@@ -236,7 +238,9 @@ export class ManageRequestsComponent implements OnInit {
     this.currentPage = pageNumber;
     this.loadRequests();
   }
-
+  isFormInvalid(): boolean {
+    return !this.selectedPatients || !this.selectedServices.length || !this.selectedGender || !this.visitDate || !this.visitTimeFrom || !this.visitTimeTo || !this.address;
+  }
   loadRequests(): void {
     this.requestsService.loadRequests(this.tenantId, this.currentPage, this.pageSize).subscribe({
       next: (response: ApiResponse<RequestResponse>) => {

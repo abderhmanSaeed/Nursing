@@ -390,9 +390,11 @@
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitDate" class="d-block w-100 mb-2">{{ 'visitDate' | translate }}</label>
-              <input type="date" class="form-control" placeholder="Choose a date" [(ngModel)]="visitDate">
+              <input type="date" class="form-control" placeholder="Choose a date" [(ngModel)]="visitDate" [min]="minDate">
             </div>
           </div>
+
+
           <div class="col-lg-6">
             <div class="mb-3">
               <label for="visitTimeFrom" class="d-block w-100 mb-2">{{ 'visitTimeFrom' | translate }}</label>
@@ -427,8 +429,8 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
         {{ 'close' | translate }}</button>
-      <button type="button" class="btn btn-primary" (click)="addRequest()">{{"addRequest" | translate}}</button>
-    </div>
+        <button type="button" class="btn btn-primary" [disabled]="isFormInvalid()" (click)="addRequest()">{{ 'addRequest' | translate }}</button>
+      </div>
   </ng-template>
 
   <!-- Edit Modal -->

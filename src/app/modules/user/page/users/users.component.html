@@ -470,7 +470,6 @@
                     [(ngModel)]="days[day[0]]">
                   <label class="form-check-label" [for]="'day_' + day[0]">{{ getNameOfDays(day[1]) }}</label>
                 </div>
-                <!-- Add other checkboxes for each day -->
               </div>
             </div>
           </div>
@@ -499,8 +498,8 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
         {{ 'close' | translate }}</button>
-      <button type="button" class="btn btn-primary" (click)="addUser()">{{"addUser" | translate}}</button>
-    </div>
+        <button type="button" class="btn btn-primary" (click)="addUser()" [disabled]="isFormInvalid()">{{ 'addUser' | translate }}</button>
+      </div>
   </ng-template>
   <!-- if the cart is empaty  -->
   <ng-template #isEmpty>
