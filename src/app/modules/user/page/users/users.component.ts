@@ -217,6 +217,35 @@ export class UsersComponent implements OnInit {
   totalPages(): number {
     return Math.ceil(this.totalItems / this.pageSize);
   }
+  isFormInvalid(): boolean {
+    console.log("days:", this.days);
+    console.log("daysArray:", this.daysArray);
+
+    // Check if any required field is empty
+    const anyFieldEmpty =
+      !this.fullName ||
+      !this.nationalId ||
+      !this.phone1 ||
+      !this.selectedRole.length ||
+      !this.selectedGender ||
+      !this.birthday ||
+      !this.address ||
+      !this.userName ||
+      !this.email ||
+      !this.password ||
+      !this.repeatPassword ||
+      !this.selectedServices.length ||
+      !this.selectedShifts.length;
+
+    // Check if any day is selected
+    const anyDaySelected = Object.values(this.days).some(daySelected => daySelected);
+
+    // Check if password and repeat password match
+    const passwordsMatch = this.password === this.repeatPassword;
+
+    return anyFieldEmpty || !anyDaySelected || !passwordsMatch;
+  }
+
 
   pages(): number[] {
     const pageCount = this.totalPages();

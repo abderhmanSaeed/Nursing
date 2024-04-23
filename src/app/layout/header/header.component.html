@@ -13,9 +13,12 @@
         </a>
       </li>
       <li class="nav-item user dropdown">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          <h5 class="text-start d-none d-lg-block">Mohamed Abd al-Sattar<span class="d-block">Super Admin</span></h5>
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <div *ngIf="userInfo">
+            <h5 class="text-start d-none d-lg-block">{{ userInfo.FullName }}<span class="d-block">{{
+                userInfo.Roles.length > 0 ? userInfo.Roles.join(', ') : 'No Roles' }}</span></h5>
+          </div>
           <figure>
             <img src="../assets/img/bg-masthead.jpg" class="img-fluid" alt="">
           </figure>

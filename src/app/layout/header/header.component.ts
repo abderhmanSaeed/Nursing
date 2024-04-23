@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/service/auth/auth.service';
 import { CONFIG } from '../../shared/configs';
 import { Router } from '@angular/router';
@@ -9,9 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
    isShowDetails: boolean = true;
    isDropdownVisible = false;
+   userInfo: any | null;
 
   isAuthenticated = this.authService.isAuth();
   selectedLanguage = 'English';
@@ -29,6 +30,10 @@ export class HeaderComponent {
 
     ) {
       // debugger;
+    }
+
+    ngOnInit(): void {
+      this.userInfo = this.authService.getUserInfo();
     }
 
   logout() {

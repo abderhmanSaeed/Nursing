@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
           // Extract the token from the response and save it
           this.authService.setToken(response.Data.Token);
           localStorage.setItem('user_info', JSON.stringify({
-            NameAr: response.Data.NameAr,
-            NameEn: response.Data.NameEn,
+            FullName: response.Data.FullName,
+            Roles: response.Data.Roles,
             PhoneList: response.Data.Phones
           }));
           // Handle successful login, e.g., navigate to the dashboard
