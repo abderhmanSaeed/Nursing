@@ -14,6 +14,7 @@ import { CONFIG } from '../../../../shared/configs';
 export class LoginComponent implements OnInit {
   usernameOrMobile: string = '';
   password: string = '';
+  loginFailed: boolean = false;
   constructor(private loginService: LoginService, private authService: AuthService,
     private router: Router,
   ) {
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
           // Handle successful login, e.g., navigate to the dashboard
           this.router.navigate([CONFIG.dashboard.name]); // Assuming you have routing set up
         } else {
+          this.loginFailed = true;
           console.error('Login Failed:', response.Message);
           // Handle login failure, show error message, etc.
         }

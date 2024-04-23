@@ -19,27 +19,27 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       {
-        canActivate: [AuthGuard],
+      //  canActivate: [AuthGuard],
         path: CONFIG.dashboard.route.substring(1),
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        canActivate: [AuthGuard],
+      //  canActivate: [AuthGuard],
         path: CONFIG.about.route.substring(1),
         loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
       },
       {
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         path: CONFIG.contact.route.substring(1),
         loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule)
       },
       {
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         path: CONFIG.user.route.substring(1),
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
       },
       {
-        canActivate: [AuthGuard],
+      //  canActivate: [AuthGuard],
         path: CONFIG.request.route.substring(1),
         loadChildren: () => import('./modules/request/request.module').then(m => m.RequestModule)
       }

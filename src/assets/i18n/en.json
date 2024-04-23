@@ -107,7 +107,7 @@
   "notes": "Notes",
   "patientPhone": "Patient Phone",
   "addRequestMessage":"Request added successfully!",
-  "editRequestMessage":"Request Reedit successfully!",
+  "editRequestMessage":"Request Updated successfully!",
   "systemRequests":"System Requests"
 
 
