@@ -3,10 +3,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xl-3 col-md-6">
-          <div class="item orange">
-            <div class="circle"></div>
+           <div class="item orange">
+            <circle-progress
+  [percent]="50"
+  [radius]="45"
+  [outerStrokeWidth]="8"
+  [innerStrokeWidth]="8"
+  [animation]="true"
+  [title]="'19'"
+  [animationDuration]="300"
+></circle-progress>
             <h3>User</h3>
-          </div>
+          </div> 
+         
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="item cyan">
@@ -22,7 +31,18 @@
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="item blue">
-            <div class="circle"></div>
+            
+            <circle-progress
+  [percent]="50"
+  [radius]="45"
+  [outerStrokeColor]="'#15a0c9'"
+  [titleColor]="'#15a0c9'"
+  [outerStrokeWidth]="8"
+  [innerStrokeWidth]="8"
+  [animation]="true"
+  [title]="'11'"
+  [animationDuration]="300"
+></circle-progress>
             <h3>Active Requests</h3>
           </div>
         </div>
@@ -61,7 +81,7 @@
             </div>
             <div class="card-content">
               <h4>Manage Requests</h4>
-              <p>Here you can manage create patient requests and manage it smoothly</p>
+              <p>Here you can manage create patient requests and manage it smoothly with full monitoring</p>
             </div>
           </div>
         </div>

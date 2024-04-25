@@ -56,7 +56,10 @@ export class LoginComponent implements OnInit {
             PhoneList: response.Data.Phones
           }));
           // Handle successful login, e.g., navigate to the dashboard
-          this.router.navigate([CONFIG.dashboard.name]); // Assuming you have routing set up
+          if(response.Data.RoleIds.indexOf("8f782a91-79a0-4b12-97a8-fa0f8ab455f7") > -1)//TODO replace it with enums/const
+            this.router.navigate([CONFIG.request.children.myrequests.route]); 
+          else
+           this.router.navigate([CONFIG.dashboard.name]); // Assuming you have routing set up
         } else {
           this.loginFailed = true;
           console.error('Login Failed:', response.Message);
