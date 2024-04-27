@@ -24,21 +24,25 @@
           </figure>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="#">My Profile</a></li>
-          <li><a class="dropdown-item" href="#">My Tasks</a></li>
-          <li><a class="dropdown-item logout" href="#">Logout</a></li>
+          <li><a class="dropdown-item">{{"myProfile" | translate}}</a></li>
+          <li><a class="dropdown-item">{{"myTasks" | translate}}</a></li>
+          <li><a class="dropdown-item logout" (click)="logout()" >{{"logout" | translate}}</a></li>
         </ul>
       </li>
       <li class="nav-item lang dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          En <i class="ms-2 fa-solid fa-globe"></i>
+        <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ selectedLanguage.toUpperCase() }} <i class="ms-2 fa-solid fa-globe"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="#">English</a></li>
-          <li><a class="dropdown-item" href="#">Belgian</a></li>
-          <li><a class="dropdown-item" href="#">Arabic</a></li>
+          <li *ngFor="let language of languages">
+            <a class="dropdown-item"  (click)="changeLanguage(language.code)">
+              {{ language.name }}
+            </a>
+          </li>
         </ul>
       </li>
+
+
     </ul>
   </div>
   <!-- <app-switch-language></app-switch-language> -->

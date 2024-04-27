@@ -259,25 +259,25 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Full Name</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"fullName"| translate}}</label>
                 <input type="text" class="form-control" id="userName">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Phone (1)</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"phone1" | translate}}</label>
                 <input type="text" class="form-control" id="userName">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Phone (2)</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"phone2" | translate}}</label>
                 <input type="text" class="form-control" id="userName">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Role</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Role" | translate}}</label>
                 <ng-select [items]="options" [searchable]="false" [(ngModel)]="selectedOptions"
                 >
                 </ng-select>
@@ -285,7 +285,7 @@
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Gender</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Gender" | translate}}</label>
                 <ng-select [items]="options" [searchable]="false" [(ngModel)]="selectedOptions"
                   >
                 </ng-select>
@@ -293,26 +293,26 @@
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Address</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Address" | translate}}</label>
                 <input type="text" class="form-control" id="userName">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Password</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Password" | translate}}</label>
                 <input type="text" class="form-control" id="userName">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Services</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Services" | translate}}</label>
                 <ng-select [items]="options" [multiple]="true" [searchable]="true" [(ngModel)]="selectedOptions">
                 </ng-select>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="mb-3">
-                <label for="userName" class="d-block w-100 mb-2">Avaiablility</label>
+                <label for="userName" class="d-block w-100 mb-2">{{"Avaiablility" | translate}}</label>
                 <div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="day_Sun" value="Sun">
@@ -349,7 +349,7 @@
               <div class="mb-3">
                 <label for="userName" class="d-block w-100 mb-2">
                   {{"attachPhoto" | translate}}
-                  <span class="d-block form-text mt-0 mb-3">{{"allowedFilestypes" | translate}} png, jpg, jpeg.</span>
+                  <span class="d-block form-text mt-0 mb-3">{{"allowedFilestypes" | translate}} {{"png, jpg, jpeg." | translate}}</span>
                 </label>
                 <div class="upload-user-img-wrapper">
                   <img src="../../../../../assets/images/avatar.svg" class="img-fluid" alt="">
@@ -368,7 +368,7 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" (click)="modal.close('Close click')">
         {{ 'close' | translate }}</button>
-      <button type="button" class="btn btn-primary">Add User</button>
+      <button type="button" class="btn btn-primary">{{"addUser" | translate}}</button>
     </div>
   </ng-template>
   <!-- if the cart is empaty  -->

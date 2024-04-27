@@ -27,12 +27,14 @@
   "faQ": "FAQ",
   "linkCopied": "User copied!",
   "login": "Login",
+  "logout":"Logout",
+  "rememberMe":"Remember Me",
   "hello": "Hello!",
   "welcomeMsg": "Welcome back, Login to Continue",
   "phoneNumber": "Phone Number",
   "handle": "You Didn't Add Your Phone Number",
   "Password": "Password",
-  "forgetPassword": "Forgot Password",
+  "forgetPassword": "Forget Your Password ?",
   "welcomeBack": "Welcome back, Login to Continue",
   "registerationMsg": "For registration please enter your phone number.and will send you the password to your mobile via SMS",
   "yourName": "Your Name",
@@ -50,6 +52,8 @@
   "name": "Name",
   "email": "Email",
   "phone": "Phone",
+  "phone1": "Phone (1)",
+  "phone2": "Phone (2)",
   "actions": "Actions",
   "edit": "Edit",
   "delete": "Delete",
@@ -76,6 +80,7 @@
   "Availability": "Availability",
   "Email" : "Email",
   "Services" : "Services",
+  "Avaiablility": "Avaiablility",
   "Shifts" : "Shifts",
   "userName" : "User Name",
   "Birthday" : "Birthday",
@@ -108,7 +113,12 @@
   "patientPhone": "Patient Phone",
   "addRequestMessage":"Request added successfully!",
   "editRequestMessage":"Request Reedit successfully!",
-  "systemRequests":"System Requests"
+  "systemRequests":"System Requests",
+  "myProfile":"My Profile",
+  "myTasks":"My Tasks",
+  "Dashboard":"Dashboard",
+  "topNursing":"Top Nursing System in Belgium",
+  "png, jpg, jpeg.":"png, jpg, jpeg."
 
 
 

@@ -8,17 +8,16 @@ import { CONFIG } from '../../shared/configs';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const token = this.authService.getToken();
-
-    if (token) {
+    const tokenLocalStorage = localStorage?.getItem('token');
+    if (tokenLocalStorage) {
       // If token exists, user is authenticated, allow route activation
       return true;
     } else {
       // If no token, redirect to login page or deny access
-      this.router.navigate([CONFIG.auth.children.login.route.substring(1),]);
+      this.router.navigate([CONFIG.auth.children.login.name]);
       return false;
     }
   }
