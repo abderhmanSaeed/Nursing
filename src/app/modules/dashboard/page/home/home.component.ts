@@ -10,6 +10,8 @@ import { CONFIG } from '../../../../shared/configs';
 })
 export class HomeComponent {
   userPageRoute = CONFIG.user.route.substring(1);
+  requestPageRoute = CONFIG.request.route.substring(1);
+
   constructor(private router: Router) { }
 
   GoTo(route:string):void{

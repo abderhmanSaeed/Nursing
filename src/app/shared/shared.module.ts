@@ -17,6 +17,7 @@ import { LoaderInterceptor } from '../core/interceptors/loader-interceptor/loade
 import { IsEmptyComponent } from './components/is-empty/is-empty.component';
 import { FilterUsersPipe } from './pipes';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 
@@ -38,7 +39,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TranslateModule,
     NgSelectModule,
     ReactiveFormsModule,
-
   ],
   exports: [SwitchLanguageComponent,
     CommonModule,

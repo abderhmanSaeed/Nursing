@@ -24,6 +24,7 @@ export const CONFIG = {
     name: 'request', route: '/request',
     children: {
       requests: { name: 'requests', route: '/request/requests' },
+      myrequests: { name: 'myrequests', route: '/request/myrequests' },
     }
   },
 };

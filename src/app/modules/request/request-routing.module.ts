@@ -11,6 +11,8 @@ const requestsRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: CONFIG.request.children.requests.route.substring(CONFIG.request.route.length + 1), component: ManageRequestsComponent },
+  { path: CONFIG.request.children.myrequests.name , component: RequestsComponent },
+  
   
 ];
 @NgModule({

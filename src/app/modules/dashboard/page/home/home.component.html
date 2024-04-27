@@ -3,10 +3,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xl-3 col-md-6">
-          <div class="item orange">
-            <div class="circle"></div>
+           <div class="item orange">
+            <circle-progress
+  [percent]="50"
+  [radius]="45"
+  [outerStrokeWidth]="8"
+  [innerStrokeWidth]="8"
+  [animation]="true"
+  [title]="'19'"
+  [animationDuration]="300"
+></circle-progress>
             <h3>User</h3>
-          </div>
+          </div> 
+         
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="item cyan">
@@ -17,30 +26,40 @@
         <div class="col-xl-3 col-md-6">
           <div class="item black">
             <div class="circle"></div>
-            <h3>Customer</h3>
+            <h3>Patient</h3>
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="item blue">
-            <div class="circle"></div>
+            
+            <circle-progress
+  [percent]="50"
+  [radius]="45"
+  [outerStrokeColor]="'#15a0c9'"
+  [titleColor]="'#15a0c9'"
+  [outerStrokeWidth]="8"
+  [innerStrokeWidth]="8"
+  [animation]="true"
+  [title]="'11'"
+  [animationDuration]="300"
+></circle-progress>
             <h3>Active Requests</h3>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="cards py-3">
-    <div class="container-fluid" (click)="GoTo(userPageRoute)">
+  <section class="cards py-3" >
+    <div class="container-fluid" >
       <div class="row">
-        <div class="col-lg-6 mb-3">
+        <div class="col-lg-6 mb-3" (click)="GoTo(userPageRoute)">
           <div class="item">
             <div class="icon">
               <img src="../assets/images/manage-users.svg" class="img-fluid" alt="">
             </div>
             <div class="card-content">
               <h4>Manage Users</h4>
-              <p>Reference site about Lorem Ipsum, giving information <br>
-                on its origins</p>
+              <p>Here you can manage all system users with different roles , also you can set availability</p>
             </div>
           </div>
         </div>
@@ -51,20 +70,18 @@
             </div>
             <div class="card-content">
               <h4>Manage Services</h4>
-              <p>Reference site about Lorem Ipsum, giving information <br>
-                on its origins</p>
+              <p>Here you can manage all system services that you provide to patients with it's duration </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 mb-3">
+        <div class="col-lg-6 mb-3" (click)="GoTo(requestPageRoute)">
           <div class="item">
             <div class="icon">
               <img src="../assets/images/manage-requests.svg" class="img-fluid" alt="">
             </div>
             <div class="card-content">
               <h4>Manage Requests</h4>
-              <p>Reference site about Lorem Ipsum, giving information <br>
-                on its origins</p>
+              <p>Here you can manage create patient requests and manage it smoothly with full monitoring</p>
             </div>
           </div>
         </div>
@@ -74,9 +91,8 @@
               <img src="../assets/images/manage-customers.svg" class="img-fluid" alt="">
             </div>
             <div class="card-content">
-              <h4>Manage Customers</h4>
-              <p>Reference site about Lorem Ipsum, giving information <br>
-                on its origins</p>
+              <h4>Manage Patients</h4>
+              <p>Here you can manage all system patients with their data such name , contact info , location and ect.</p>
             </div>
           </div>
         </div>
@@ -87,8 +103,7 @@
             </div>
             <div class="card-content">
               <h4>Manage Shifts</h4>
-              <p>Reference site about Lorem Ipsum, giving information <br>
-                on its origins</p>
+              <p>Here you can manage system shifts for employees</p>
             </div>
           </div>
         </div>

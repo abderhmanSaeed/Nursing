@@ -1,6 +1,6 @@
 <main>
   <!-- user-list.component.html -->
-  <div class="card border-0 p-3 rounded-4 mb-3">
+  <div class="card border-0 rounded-4 mb-3">
     <div class="card-body">
       <div *ngIf="showCopiedMessage" class="copied-message">{{"linkCopied" | translate}}</div>
 
@@ -74,7 +74,7 @@
       <div class="d-block d-sm-flex justify-content-between align-items-center mb-3">
         <div>
           <h5 class="card-title">{{"systemUsers" | translate}}</h5>
-          <p class="card-subtitle">{{"moreThan" | translate}} {{totalItems}}</p>
+          <p class="card-subtitle">{{"moreThan" | translate}} {{totalItems}} {{"systemUsers" | translate}}</p>
         </div>
         <button type="button" class="btn btn-primary mt-3 mt-sm-0" (click)="openModal()">
           {{"addUser" | translate}}</button>
