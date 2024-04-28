@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ApiResponse, Lookup, User, UsersResponse } from '../../../../shared/models';
 import { UserService } from '../../../../data/service/user/user.service';
 import { AuthService } from '../../../../core/service/auth/auth.service';
@@ -17,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UsersComponent implements OnInit {
 
   @ViewChild('addUserModal') addUserModal: TemplateRef<any> | undefined;
+  @ViewChild('editUserModal') editUserModal: TemplateRef<any> | undefined;
 
   users: User[] = [];
   totalItems = 0;
@@ -78,7 +79,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UserService, private authService: AuthService, private modalService: NgbModal,
     private lookupsService: LookupsService, private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar, private ngZone: NgZone) {
     // Initialize maxStartDate with today's date
     const today = new Date();
     this.maxStartDate = today.toISOString().split('T')[0];
@@ -185,7 +186,8 @@ export class UsersComponent implements OnInit {
             this.modalService.dismissAll();
             // Show snackbar for 5 seconds
             const currentLang = this.authService.getCurrentLanguage();
-            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' :'User added successfully!', 'Close', 5000);          }
+            this.showSnackBar(currentLang === 'ar' ? 'تم اضافة المستخدم' : 'User added successfully!', 'Close', 5000);
+          }
         },
         (error) => {
           console.error('Error adding user:', error);
@@ -193,6 +195,34 @@ export class UsersComponent implements OnInit {
         }
       );
   }
+  editUser() {
+
+  }
+  openEditModal(item: any): void {
+    console.log(item);
+    this.fullName = item.FullName || '';
+    this.nationalId = item.NationalId || '';
+    this.phone1 = item.Phones[0] || '';
+    this.phone2 = item.Phones[1] || '';
+    this.selectedRole = item.Roles || [];
+    this.selectedGender = item.IsMale ? 'Male' : 'Female'; // Assuming your ng-select uses 'Male'/'Female' as values
+    this.birthday = item.BirthDate ? new Date(item.BirthDate).toISOString().split('T')[0] : ''; // Convert to proper format
+    this.address = item.UserLocation || '';
+    this.userName = item.UserName || '';
+    this.email = item.Email || '';
+    // Assuming you have a service to check if the password matches and setting the boolean variable passwordsMatch accordingly
+    this.password = '';
+    this.repeatPassword = '';
+    this.passwordsMatch = true;
+
+   // Initialize the days object based on the item.WorksingDays array
+  this.daysArray.forEach((day: any) => {
+    // Check if the day is included in the item.WorksingDays array
+    this.days[day] = item.WorksingDays.includes(day);
+  });
+    this.modalService.open(this.editUserModal, { size: 'lg' });
+  }
+
   showSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
       duration: duration,
@@ -218,9 +248,6 @@ export class UsersComponent implements OnInit {
     return Math.ceil(this.totalItems / this.pageSize);
   }
   isFormInvalid(): boolean {
-    console.log("days:", this.days);
-    console.log("daysArray:", this.daysArray);
-
     // Check if any required field is empty
     const anyFieldEmpty =
       !this.fullName ||

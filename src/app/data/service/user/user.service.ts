@@ -20,4 +20,7 @@ export class UserService {
   addUser(user: any) {
     return this.httpService.post(APIs.addUser, user);
   }
+  editUser(user: any) {
+    return this.httpService.put(APIs.addUser, user);
+  }
 }

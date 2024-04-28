@@ -59,6 +59,7 @@
   "admin": "مدير",
   "employee": "موظف",
   "addUser": "إضافة مستخدم",
+  "editUser": "تعديل مستخدم",
   "addRequest":"إضافة طلب",
   "editRequest":"تعديل طلب",
   "user": "مستخدمين",

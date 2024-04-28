@@ -61,6 +61,7 @@
   "admin": "Admin",
   "employee": "Employee",
   "addUser": "Add User",
+  "editUser": "Edit User",
   "addRequest":"Add Request",
   "editRequest":"Edit Request",
   "user": "Users",
